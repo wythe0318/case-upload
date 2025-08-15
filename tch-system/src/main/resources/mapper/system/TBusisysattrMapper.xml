@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tch.system.mapper.TBusisysattrMapper">
+    
+    <resultMap type="com.tch.system.domain.TBusisysattr" id="TBusisysattrResult">
+        <result property="unid"    column="unid"    />
+        <result property="fromareacode"    column="fromareacode"    />
+        <result property="fromareaname"    column="fromareaname"    />
+        <result property="toareacode"    column="toareacode"    />
+        <result property="toareaname"    column="toareaname"    />
+        <result property="content"    column="content"    />
+        <result property="createTime"    column="createTime"    />
+        <result property="tchar1"    column="tchar1"    />
+        <result property="tchar2"    column="tchar2"    />
+        <result property="tchar3"    column="tchar3"    />
+        <result property="tchar4"    column="tchar4"    />
+        <result property="tblob1"    column="tblob1"    />
+        <result property="tblob2"    column="tblob2"    />
+        <result property="systime"    column="systime"    />
+        <result property="syncstate"    column="syncstate"    />
+        <result property="synctime"    column="synctime"    />
+        <result property="syncdesc"    column="syncdesc"    />
+        <result property="remark"    column="remark"    />
+        <result property="busino"    column="busino"    />
+        <result property="batchno"    column="batchno"    />
+        <result property="systime2"    column="systime2"    />
+    </resultMap>
+
+    <sql id="selectTBusisysattrVo">
+        select unid, fromareacode, fromareaname, toareacode, toareaname, content, createTime, tchar1, tchar2, tchar3, tchar4, tblob1, tblob2, systime, syncstate, synctime, syncdesc, remark, busino, batchno, systime2 from JYXX.t_busisysattr
+    </sql>
+
+    <select id="selectTBusisysattrList" parameterType="com.tch.system.domain.TBusisysattr" resultMap="TBusisysattrResult">
+        <include refid="selectTBusisysattrVo"/>
+        <where>  
+            <if test="unid != null  and unid != ''"> and unid = #{unid}</if>
+            <if test="fromareacode != null  and fromareacode != ''"> and fromareacode = #{fromareacode}</if>
+            <if test="fromareaname != null  and fromareaname != ''"> and fromareaname like concat(concat('%', #{fromareaname}), '%')</if>
+            <if test="toareacode != null  and toareacode != ''"> and toareacode = #{toareacode}</if>
+            <if test="toareaname != null  and toareaname != ''"> and toareaname like concat(concat('%', #{toareaname}), '%')</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="createTime != null "> and createTime = #{createTime}</if>
+            <if test="tchar1 != null  and tchar1 != ''"> and tchar1 = #{tchar1}</if>
+            <if test="tchar2 != null  and tchar2 != ''"> and tchar2 = #{tchar2}</if>
+            <if test="tchar3 != null  and tchar3 != ''"> and tchar3 = #{tchar3}</if>
+            <if test="tchar4 != null  and tchar4 != ''"> and tchar4 = #{tchar4}</if>
+            <if test="tblob1 != null  and tblob1 != ''"> and tblob1 = #{tblob1}</if>
+            <if test="tblob2 != null  and tblob2 != ''"> and tblob2 = #{tblob2}</if>
+            <if test="systime != null "> and systime = #{systime}</if>
+            <if test="syncstate != null  and syncstate != ''"> and syncstate = #{syncstate}</if>
+            <if test="synctime != null "> and synctime = #{synctime}</if>
+            <if test="syncdesc != null  and syncdesc != ''"> and syncdesc = #{syncdesc}</if>
+            <if test="busino != null  and busino != ''"> and busino = #{busino}</if>
+            <if test="batchno != null  and batchno != ''"> and batchno = #{batchno}</if>
+            <if test="systime2 != null "> and systime2 = #{systime2}</if>
+        </where>
+    </select>
+    
+    <select id="selectTBusisysattrByUnid" parameterType="String" resultMap="TBusisysattrResult">
+        <include refid="selectTBusisysattrVo"/>
+        where unid = #{unid}
+    </select>
+        
+    <insert id="insertTBusisysattr" parameterType="com.tch.system.domain.TBusisysattr">
+        insert into JYXX.t_busisysattr
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="unid != null and unid != ''">unid,</if>
+            <if test="fromareacode != null and fromareacode != ''">fromareacode,</if>
+            <if test="fromareaname != null and fromareaname != ''">fromareaname,</if>
+            <if test="toareacode != null and toareacode != ''">toareacode,</if>
+            <if test="toareaname != null and toareaname != ''">toareaname,</if>
+            <if test="content != null">content,</if>
+            <if test="createTime != null">createTime,</if>
+            <if test="tchar1 != null">tchar1,</if>
+            <if test="tchar2 != null">tchar2,</if>
+            <if test="tchar3 != null">tchar3,</if>
+            <if test="tchar4 != null">tchar4,</if>
+            <if test="tblob1 != null">tblob1,</if>
+            <if test="tblob2 != null">tblob2,</if>
+            <if test="systime != null">systime,</if>
+            <if test="syncstate != null and syncstate != ''">syncstate,</if>
+            <if test="synctime != null">synctime,</if>
+            <if test="syncdesc != null">syncdesc,</if>
+            <if test="remark != null">remark,</if>
+            <if test="busino != null">busino,</if>
+            <if test="batchno != null">batchno,</if>
+            <if test="systime2 != null">systime2,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="unid != null and unid != ''">#{unid},</if>
+            <if test="fromareacode != null and fromareacode != ''">#{fromareacode},</if>
+            <if test="fromareaname != null and fromareaname != ''">#{fromareaname},</if>
+            <if test="toareacode != null and toareacode != ''">#{toareacode},</if>
+            <if test="toareaname != null and toareaname != ''">#{toareaname},</if>
+            <if test="content != null">#{content},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="tchar1 != null">#{tchar1},</if>
+            <if test="tchar2 != null">#{tchar2},</if>
+            <if test="tchar3 != null">#{tchar3},</if>
+            <if test="tchar4 != null">#{tchar4},</if>
+            <if test="tblob1 != null">#{tblob1},</if>
+            <if test="tblob2 != null">#{tblob2},</if>
+            <if test="systime != null">#{systime},</if>
+            <if test="syncstate != null and syncstate != ''">#{syncstate},</if>
+            <if test="synctime != null">#{synctime},</if>
+            <if test="syncdesc != null">#{syncdesc},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="busino != null">#{busino},</if>
+            <if test="batchno != null">#{batchno},</if>
+            <if test="systime2 != null">#{systime2},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTBusisysattr" parameterType="com.tch.system.domain.TBusisysattr">
+        update JYXX.t_busisysattr
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fromareacode != null and fromareacode != ''">fromareacode = #{fromareacode},</if>
+            <if test="fromareaname != null and fromareaname != ''">fromareaname = #{fromareaname},</if>
+            <if test="toareacode != null and toareacode != ''">toareacode = #{toareacode},</if>
+            <if test="toareaname != null and toareaname != ''">toareaname = #{toareaname},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="createTime != null">createTime = #{createTime},</if>
+            <if test="tchar1 != null">tchar1 = #{tchar1},</if>
+            <if test="tchar2 != null">tchar2 = #{tchar2},</if>
+            <if test="tchar3 != null">tchar3 = #{tchar3},</if>
+            <if test="tchar4 != null">tchar4 = #{tchar4},</if>
+            <if test="tblob1 != null">tblob1 = #{tblob1},</if>
+            <if test="tblob2 != null">tblob2 = #{tblob2},</if>
+            <if test="systime != null">systime = #{systime},</if>
+            <if test="syncstate != null and syncstate != ''">syncstate = #{syncstate},</if>
+            <if test="synctime != null">synctime = #{synctime},</if>
+            <if test="syncdesc != null">syncdesc = #{syncdesc},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="busino != null">busino = #{busino},</if>
+            <if test="batchno != null">batchno = #{batchno},</if>
+            <if test="systime2 != null">systime2 = #{systime2},</if>
+        </trim>
+        where unid = #{unid}
+    </update>
+
+    <delete id="deleteTBusisysattrByUnid" parameterType="String">
+        delete from JYXX.t_busisysattr where unid = #{unid}
+    </delete>
+
+    <delete id="deleteTBusisysattrByUnids" parameterType="String">
+        delete from JYXX.t_busisysattr where unid in
+        <foreach item="unid" collection="array" open="(" separator="," close=")">
+            #{unid}
+        </foreach>
+    </delete>
+</mapper>

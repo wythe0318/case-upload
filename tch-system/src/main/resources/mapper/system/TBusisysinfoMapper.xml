@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tch.system.mapper.TBusisysinfoMapper">
+
+    <resultMap type="com.tch.system.domain.TBusisysinfo" id="TBusisysinfoResult">
+        <result property="unid" column="unid"/>
+        <result property="fromareacode" column="fromareacode"/>
+        <result property="fromareaname" column="fromareaname"/>
+        <result property="toareacode" column="toareacode"/>
+        <result property="toareaname" column="toareaname"/>
+        <result property="applyfrom" column="applyfrom"/>
+        <result property="type" column="type"/>
+        <result property="createtime" column="createtime"  jdbcType="TIMESTAMP"/>
+        <result property="content" column="content"/>
+        <result property="xsdtype" column="xsdtype"/>
+        <result property="copyright" column="copyright"/>
+        <result property="tchar1" column="tchar1"/>
+        <result property="tchar2" column="tchar2"/>
+        <result property="tchar3" column="tchar3"/>
+        <result property="tchar4" column="tchar4"/>
+        <result property="tblob1" column="tblob1" />
+        <result property="tblob2" column="tblob2" />
+        <result property="action" column="action"/>
+        <result property="systime" column="systime"/>
+        <result property="syncstate" column="syncstate"/>
+        <result property="synctime" column="synctime"/>
+        <result property="syncdesc" column="syncdesc"/>
+        <result property="remark" column="remark"/>
+        <result property="busino" column="busino"/>
+        <result property="batchno" column="batchno"/>
+        <result property="systime2" column="systime2"/>
+        <result property="isSuccess" column="is_success"/>
+    </resultMap>
+
+    <sql id="selectTBusisysinfoVo">
+        select unid,
+               fromareacode,
+               fromareaname,
+               toareacode,
+               toareaname,
+               applyfrom,
+               type,
+               createtime,
+               content,
+               xsdtype,
+               copyright,
+               tchar1,
+               tchar2,
+               tchar3,
+               tchar4,
+               tblob1,
+               tblob2,
+               action,
+               systime,
+               syncstate,
+               synctime,
+               syncdesc,
+               remark,
+               busino,
+               batchno,
+               systime2,
+               is_success
+        from JYXX.t_busisysinfo
+    </sql>
+
+    <select id="selectTBusisysinfoList" parameterType="com.tch.system.domain.TBusisysinfo" resultMap="TBusisysinfoResult">
+        <include refid="selectTBusisysinfoVo"/>
+        <where>
+            <if test="unid != null  and unid != ''">unid =#{unid}</if>
+            <if test="fromareacode != null  and fromareacode != ''">and fromareacode = #{fromareacode}</if>
+            <if test="fromareaname != null  and fromareaname != ''">and fromareaname like concat(concat('%',
+                #{fromareaname}), '%')
+            </if>
+            <if test="toareacode != null  and toareacode != ''">and toareacode = #{toareacode}</if>
+            <if test="toareaname != null  and toareaname != ''">and toareaname like concat(concat('%', #{toareaname}),
+                '%')
+            </if>
+            <if test="applyfrom != null  and applyfrom != ''">and applyfrom = #{applyfrom}</if>
+            <if test="type != null  and type != ''">and type = #{type}</if>
+            <if test="content != null  and content != ''">and content = #{content}</if>
+            <if test="xsdtype != null  and xsdtype != ''">and xsdtype = #{xsdtype}</if>
+            <if test="copyright != null  and copyright != ''">and copyright = #{copyright}</if>
+            <if test="tchar1 != null  and tchar1 != ''">and tchar1 = #{tchar1}</if>
+            <if test="tchar2 != null  and tchar2 != ''">and tchar2 = #{tchar2}</if>
+            <if test="tchar3 != null  and tchar3 != ''">and tchar3 = #{tchar3}</if>
+            <if test="tchar4 != null  and tchar4 != ''">and tchar4 = #{tchar4}</if>
+            <if test="tblob1 != null  and tblob1 != ''">and tblob1 = #{tblob1}</if>
+            <if test="tblob2 != null  and tblob2 != ''">and tblob2 = #{tblob2}</if>
+            <if test="action != null  and action != ''">and action = #{action}</if>
+            <if test="systime != null ">and systime = #{systime}</if>
+            <if test="syncstate != null  and syncstate != ''">and syncstate = #{syncstate}</if>
+            <if test="synctime != null ">and synctime = #{synctime}</if>
+            <if test="syncdesc != null  and syncdesc != ''">and syncdesc = #{syncdesc}</if>
+            <if test="busino != null  and busino != ''">and busino = #{busino}</if>
+            <if test="batchno != null  and batchno != ''">and batchno = #{batchno}</if>
+            <if test="systime2 != null ">and systime2 = #{systime2}</if>
+            <if test="isSuccess != null  and isSuccess != ''">and is_success = #{isSuccess}</if>
+        </where>
+    </select>
+
+    <select id="selectTBusisysinfoByUnid" parameterType="String" resultMap="TBusisysinfoResult" >
+        <include refid="selectTBusisysinfoVo"/>
+        where unid = #{unid}
+    </select>
+
+    <select id="selectTBusisysinfoByType" parameterType="String" resultMap="TBusisysinfoResult" >
+        <include refid="selectTBusisysinfoVo"/>
+        where
+        type = #{type}
+        AND tchar4  IS NULL
+        AND ROWNUM &lt;= 1000
+    </select>
+
+    <select id="selectTBusisysinfoDataList" resultType="com.tch.system.domain.TBusisysinfo" resultMap="TBusisysinfoResult">
+        <include refid="selectTBusisysinfoVo"/>
+        where
+        tchar4  IS NULL
+        AND ROWNUM &lt;= 1000
+    </select>
+
+    <insert id="insertTBusisysinfo" parameterType="com.tch.system.domain.TBusisysinfo">
+        insert into JYXX.T_BUSISYSINFO
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="unid != null and unid != ''">unid,</if>
+            <if test="fromareacode != null and fromareacode != ''">fromareacode,</if>
+            <if test="fromareaname != null and fromareaname != ''">fromareaname,</if>
+            <if test="toareacode != null and toareacode != ''">toareacode,</if>
+            <if test="toareaname != null and toareaname != ''">toareaname,</if>
+            <if test="applyfrom != null and applyfrom != ''">applyfrom,</if>
+            <if test="type != null and type != ''">type,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="content != null">content,</if>
+            <if test="xsdtype != null and xsdtype != ''">xsdtype,</if>
+            <if test="copyright != null and copyright != ''">copyright,</if>
+            <if test="tchar1 != null">tchar1,</if>
+            <if test="tchar2 != null">tchar2,</if>
+            <if test="tchar3 != null">tchar3,</if>
+            <if test="tchar4 != null">tchar4,</if>
+            <if test="tblob1 != null">tblob1,</if>
+            <if test="tblob2 != null">tblob2,</if>
+            <if test="action != null and action != ''">action,</if>
+            <if test="systime != null">systime,</if>
+            <if test="syncstate != null and syncstate != ''">syncstate,</if>
+            <if test="synctime != null">synctime,</if>
+            <if test="syncdesc != null">syncdesc,</if>
+            <if test="remark != null">remark,</if>
+            <if test="busino != null">busino,</if>
+            <if test="batchno != null">batchno,</if>
+            <if test="systime2 != null">systime2,</if>
+            <if test="isSuccess != null">is_success,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="unid != null and unid != ''">#{unid},</if>
+            <if test="fromareacode != null and fromareacode != ''">#{fromareacode},</if>
+            <if test="fromareaname != null and fromareaname != ''">#{fromareaname},</if>
+            <if test="toareacode != null and toareacode != ''">#{toareacode},</if>
+            <if test="toareaname != null and toareaname != ''">#{toareaname},</if>
+            <if test="applyfrom != null and applyfrom != ''">#{applyfrom},</if>
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="content != null">#{content},</if>
+            <if test="xsdtype != null and xsdtype != ''">#{xsdtype},</if>
+            <if test="copyright != null and copyright != ''">#{copyright},</if>
+            <if test="tchar1 != null">#{tchar1},</if>
+            <if test="tchar2 != null">#{tchar2},</if>
+            <if test="tchar3 != null">#{tchar3},</if>
+            <if test="tchar4 != null">#{tchar4},</if>
+            <if test="tblob1 != null">#{tblob1},</if>
+            <if test="tblob2 != null">#{tblob2},</if>
+            <if test="action != null and action != ''">#{action},</if>
+            <if test="systime != null">#{systime},</if>
+            <if test="syncstate != null and syncstate != ''">#{syncstate},</if>
+            <if test="synctime != null">#{synctime},</if>
+            <if test="syncdesc != null">#{syncdesc},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="busino != null">#{busino},</if>
+            <if test="batchno != null">#{batchno},</if>
+            <if test="systime2 != null">#{systime2},</if>
+            <if test="isSuccess != null">#{isSuccess},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTBusisysinfo" parameterType="com.tch.system.domain.TBusisysinfo">
+        update JYXX.t_busisysinfo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fromareacode != null and fromareacode != ''">fromareacode = #{fromareacode},</if>
+            <if test="fromareaname != null and fromareaname != ''">fromareaname = #{fromareaname},</if>
+            <if test="toareacode != null and toareacode != ''">toareacode = #{toareacode},</if>
+            <if test="toareaname != null and toareaname != ''">toareaname = #{toareaname},</if>
+            <if test="applyfrom != null and applyfrom != ''">applyfrom = #{applyfrom},</if>
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="xsdtype != null and xsdtype != ''">xsdtype = #{xsdtype},</if>
+            <if test="copyright != null and copyright != ''">copyright = #{copyright},</if>
+            <if test="tchar1 != null">tchar1 = #{tchar1},</if>
+            <if test="tchar2 != null">tchar2 = #{tchar2},</if>
+            <if test="tchar3 != null">tchar3 = #{tchar3},</if>
+            <if test="tchar4 != null">tchar4 = #{tchar4},</if>
+            <if test="tblob1 != null">tblob1 = #{tblob1},</if>
+            <if test="tblob2 != null">tblob2 = #{tblob2},</if>
+            <if test="action != null and action != ''">action = #{action},</if>
+            <if test="systime != null">systime = #{systime},</if>
+            <if test="syncstate != null and syncstate != ''">syncstate = #{syncstate},</if>
+            <if test="synctime != null">synctime = #{synctime},</if>
+            <if test="syncdesc != null">syncdesc = #{syncdesc},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="busino != null">busino = #{busino},</if>
+            <if test="batchno != null">batchno = #{batchno},</if>
+            <if test="systime2 != null">systime2 = #{systime2},</if>
+            <if test="isSuccess != null">is_success = #{isSuccess},</if>
+        </trim>
+        where unid = #{unid}
+    </update>
+
+
+
+
+
+    <update id="updateTBusisysinfoByIdList" parameterType="com.tch.system.domain.TBusisysinfo">
+        <foreach collection="list" item="item" separator=";">
+            update JYXX.t_busisysinfo
+            <trim prefix="SET" suffixOverrides=",">
+                <if test="item.fromareacode != null and item.fromareacode != ''">fromareacode = #{item.fromareacode},</if>
+                <if test="item.fromareaname != null and item.fromareaname != ''">fromareaname = #{item.fromareaname},</if>
+                <if test="item.toareacode != null and item.toareacode != ''">toareacode = #{item.toareacode},</if>
+                <if test="item.toareaname != null and item.toareaname != ''">toareaname = #{item.toareaname},</if>
+                <if test="item.applyfrom != null and item.applyfrom != ''">applyfrom = #{item.applyfrom},</if>
+                <if test="item.type != null and item.type != ''">type = #{item.type},</if>
+                <if test="item.content != null">content = #{item.content},</if>
+                <if test="item.xsdtype != null and item.xsdtype != ''">xsdtype = #{item.xsdtype},</if>
+                <if test="item.copyright != null and item.copyright != ''">copyright = #{item.copyright},</if>
+                <if test="item.tchar1 != null">tchar1 = #{item.tchar1},</if>
+                <if test="item.tchar2 != null">tchar2 = #{item.tchar2},</if>
+                <if test="item.tchar3 != null">tchar3 = #{item.tchar3},</if>
+                <if test="item.tchar4 != null">tchar4 = #{item.tchar4},</if>
+                <if test="item.tblob1 != null">tblob1 = #{item.tblob1},</if>
+                <if test="item.tblob2 != null">tblob2 = #{item.tblob2},</if>
+                <if test="item.action != null and item.action != ''">action = #{item.action},</if>
+                <if test="item.systime != null">systime = #{item.systime},</if>
+                <if test="item.syncstate != null and item.syncstate != ''">syncstate = #{item.syncstate},</if>
+                <if test="item.synctime != null">synctime = #{item.synctime},</if>
+                <if test="item.syncdesc != null">syncdesc = #{item.syncdesc},</if>
+                <if test="item.remark != null">remark = #{item.remark},</if>
+                <if test="item.busino != null">busino = #{item.busino},</if>
+                <if test="item.batchno != null">batchno = #{item.batchno},</if>
+                <if test="item.systime2 != null">systime2 = #{item.systime2},</if>
+                <if test="item.isSuccess != null">is_success = #{item.isSuccess},</if>
+            </trim>
+            where unid = #{item.unid}
+        </foreach>
+    </update>
+
+
+
+
+    <delete id="deleteTBusisysinfoByUnid" parameterType="String">
+        delete
+        from JYXX.t_busisysinfo
+        where unid = #{unid}
+    </delete>
+
+    <delete id="deleteTBusisysinfoByUnids" parameterType="String">
+        delete from JYXX.t_busisysinfo where unid in
+        <foreach item="unid" collection="array" open="(" separator="," close=")">
+            #{unid}
+        </foreach>
+    </delete>
+</mapper>

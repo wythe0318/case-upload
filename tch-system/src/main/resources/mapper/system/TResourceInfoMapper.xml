@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tch.system.mapper.TResourceInfoMapper">
+
+    <resultMap id="ResourceInfoResultMap" type="com.tch.system.domain.TResourceInfo">
+        <id property="unId" column="UNID"/>
+        <result property="fromAreaCode" column="FROMAREACODE"/>
+        <result property="fromAreaName" column="FROMAREANAME"/>
+        <result property="toAreaCode" column="TOAREACODE"/>
+        <result property="toAreaName" column="TOAREANAME"/>
+        <result property="applyFrom" column="APPLYFROM"/>
+        <result property="type" column="TYPE"/>
+        <result property="createTime" column="CREATETIME"/>
+        <result property="content" column="CONTENT"/>
+        <result property="xsdType" column="XSDTYPE"/>
+        <result property="copyright" column="COPYRIGHT"/>
+        <result property="tchar1" column="TCHAR1"/>
+        <result property="tchar2" column="TCHAR2"/>
+        <result property="tchar3" column="TCHAR3"/>
+        <result property="tchar4" column="TCHAR4"/>
+        <result property="tblob1" column="TBLOB1"/>
+        <result property="tblob2" column="TBLOB2"/>
+        <result property="action" column="ACTION"/>
+        <result property="sysTime" column="SYSTIME"/>
+        <result property="syncState" column="SYNCSTATE"/>
+        <result property="syncTime" column="SYNCTIME"/>
+        <result property="syncDesc" column="SYNCDESC"/>
+        <result property="remark" column="REMARK"/>
+        <result property="busiNo" column="BUSINO"/>
+        <result property="sysTime2" column="SYSTIME2"/>
+        <result property="batchNo" column="BATCHNO"/>
+    </resultMap>
+
+
+    <sql id="selectTResourceInfo">
+        select unId,
+               fromAreaCode,
+               fromAreaName,
+               toAreaCode,
+               toAreaName,
+               applyFrom,
+               type,
+               createTime,
+               content,
+               xsdType,
+               copyright,
+               tchar1,
+               tchar2,
+               tchar3,
+               tchar4,
+               tblob1,
+               tblob2,
+            action,
+            sysTime,
+            syncState,
+            syncTime,
+            syncDesc,
+            remark,
+            busiNo,
+            sysTime2,
+            batchNo
+        FROM JYXX.T_RESOURCEINFO
+    </sql>
+    <select id="selectTResourceInfoDataList" resultType="com.tch.system.domain.TResourceInfo">
+        <include refid="selectTResourceInfo"/>
+        WHERE
+        -- dbms_lob.instr(content,utl_raw.CAST_TO_RAW('成功'),1,1)>0
+        <if test="tchar1 != null">
+            TCHAR1 = #{tchar1}
+        </if>
+        ORDER BY TYPE DESC
+    </select>
+
+    <select id="selectTResourceInfoDataResultSuccess" resultType="com.tch.system.domain.TResourceInfo">
+        <include refid="selectTResourceInfo"/>
+        WHERE
+        dbms_lob.instr(content,utl_raw.CAST_TO_RAW('成功'),1,1)>0
+        <if test="tchar1 != null">
+            and TCHAR1 = #{tchar1}
+        </if>
+    </select>
+
+    <select id="selectTResourceInfoDataResultRepeat" resultType="com.tch.system.domain.TResourceInfo">
+        <include refid="selectTResourceInfo"/>
+        WHERE
+        type='999'
+        <if test="tchar1 != null">
+            and TCHAR1 = #{tchar1}
+        </if>
+        and dbms_lob.instr(content,utl_raw.CAST_TO_RAW('重复'),1,1)>0
+
+    </select>
+</mapper>

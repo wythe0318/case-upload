@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tch.system.mapper.WsspXmlMapper">
+
+    <resultMap id="attrtMap" type="com.tch.system.entity.convert2xml.Attr">
+        <id column="ATTR_ID" property="attrId"/>
+        <result column="ATTR_UNID" property="attrUNID"/>
+        <result column="ATTR_MODE" property="attrMode"/>
+        <result column="SWB_CODE" property="swbCode"/>
+        <result column="SRC_CODE" property="srcCode"/>
+        <result column="NAME" property="name"/>
+        <result column="SORT" property="sort"/>
+        <result column="FILE_NAME" property="fileName"/>
+        <result column="DATASHARE" property="datashare"/>
+        <result column="LICENSE_IDENTIFIER" property="licenseIdentifier"/>
+        <result column="CERTIFICATE_TYPE_CODE" property="certificateTypeCode"/>
+        <result column="CERTIFICATE_HOLDER_CODE" property="certificateHolderCode"/>
+        <result column="DATA_ID" property="dataId"/>
+    </resultMap>
+
+
+    <select id="selectAttrByDataId" resultType="com.tch.system.entity.convert2xml.Attr"
+            resultMap="attrtMap">
+        SELECT ATTR_ID,
+               ATTR_UNID,
+               ATTR_MODE,
+               SWB_CODE,
+               SRC_CODE,
+               NAME,
+               SORT,
+               FILE_NAME,
+               DATASHARE,
+               LICENSE_IDENTIFIER,
+               CERTIFICATE_TYPE_CODE,
+               CERTIFICATE_HOLDER_CODE,
+               DATA_ID
+        FROM HLWJ.WSSP_ATTR
+        where DATA_ID = #{dataId}
+
+
+    </select>
+
+    <insert id="insertAttr" parameterType="com.tch.system.entity.convert2xml.Attr">
+        INSERT INTO HLWJ.WSSP_ATTR
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="attrId != null">ATTR_ID,</if>
+            <if test="attrUNID != null">ATTR_UNID,</if>
+            <if test="attrMode != null">ATTR_MODE,</if>
+            <if test="swbCode != null">SWB_CODE,</if>
+            <if test="srcCode != null">SRC_CODE,</if>
+            <if test="name != null">NAME,</if>
+            <if test="sort != null">SORT,</if>
+            <if test="fileName != null">FILE_NAME,</if>
+            <if test="datashare != null">DATASHARE,</if>
+            <if test="licenseIdentifier != null">LICENSE_IDENTIFIER,</if>
+            <if test="certificateTypeCode != null">CERTIFICATE_TYPE_CODE,</if>
+            <if test="certificateHolderCode != null">CERTIFICATE_HOLDER_CODE,</if>
+            <if test="dataId != null">DATA_ID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="attrId != null">#{attrId},</if>
+            <if test="attrUNID != null">#{attrUNID},</if>
+            <if test="attrMode != null">#{attrMode},</if>
+            <if test="swbCode != null">#{swbCode},</if>
+            <if test="srcCode != null">#{srcCode},</if>
+            <if test="name != null">#{name},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="fileName != null">#{fileName},</if>
+            <if test="datashare != null">#{datashare},</if>
+            <if test="licenseIdentifier != null">#{licenseIdentifier},</if>
+            <if test="certificateTypeCode != null">#{certificateTypeCode},</if>
+            <if test="certificateHolderCode != null">#{certificateHolderCode},</if>
+            <if test="dataId != null">#{dataId},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="RouterResultMap" type="com.tch.system.entity.common.Router">
+        <id property="routerId" column="ROUTER_ID"/>
+        <result property="fromAreaCode" column="FROM_AREA_CODE"/>
+        <result property="fromAreaName" column="FROM_AREA_NAME"/>
+        <result property="toAreaCode" column="TO_AREA_CODE"/>
+        <result property="toAreaName" column="TO_AREA_NAME"/>
+        <result property="targetSystem" column="TARGET_SYSTEM"/>
+        <result property="sendTime" column="SEND_TIME"/>
+        <result property="prevLinkUNID" column="PREV_LINK_UNID"/>
+        <result property="dataId" column="DATA_ID"/>
+    </resultMap>
+
+
+    <select id="selectRouter" resultType="com.tch.system.entity.common.Router"
+            resultMap="RouterResultMap">
+        SELECT
+        ROUTER_ID,
+        FROM_AREA_CODE,
+        FROM_AREA_NAME,
+        TO_AREA_CODE,
+        TO_AREA_NAME,
+        TARGET_SYSTEM,
+        SEND_TIME,
+        PREV_LINK_UNID,
+        DATA_ID
+        FROM HLWJ.ROUTER
+        <where>
+            <if test="fromAreaCode">AND FROM_AREA_CODE=#{fromAreaCode}</if>
+            <if test="fromAreaName">AND FROM_AREA_NAME=#{fromAreaName}</if>
+            <if test="toAreaCode">AND TO_AREA_CODE=#{toAreaCode}</if>
+            <if test="toAreaName">AND TO_AREA_NAME=#{toAreaName}</if>
+            <if test="targetSystem">TARGET_SYSTEM=#{targetSystem}</if>
+            <if test="sendTime">AND SEND_TIME=#{sendTime}</if>
+            <if test="prevLinkUNID">PREV_LINK_UNID=#{prevLinkUNID}</if>
+            <if test="dataId">AND DATA_ID=#{dataId}</if>
+        </where>
+    </select>
+
+
+    <select id="selectByRouterDataId" resultType="com.tch.system.entity.common.Router"
+            resultMap="RouterResultMap">
+
+        SELECT
+        ROUTER_ID,
+        FROM_AREA_CODE,
+        FROM_AREA_NAME,
+        TO_AREA_CODE,
+        TO_AREA_NAME,
+        TARGET_SYSTEM,
+        SEND_TIME,
+        PREV_LINK_UNID,
+        DATA_ID
+        FROM HLWJ.ROUTER
+        <where>
+            <if test="dataId">AND DATA_ID=#{dataId}</if>
+        </where>
+    </select>
+
+
+    <insert id="insertRouter" parameterType="com.tch.system.entity.common.Router">
+        INSERT INTO HLWJ.ROUTER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="routerId != null">ROUTER_ID,</if>
+            <if test="fromAreaCode != null">FROM_AREA_CODE,</if>
+            <if test="fromAreaName != null">FROM_AREA_NAME,</if>
+            <if test="toAreaCode != null">TO_AREA_CODE,</if>
+            <if test="toAreaName != null">TO_AREA_NAME,</if>
+            <if test="targetSystem != null">TARGET_SYSTEM,</if>
+            <if test="sendTime != null">SEND_TIME,</if>
+            <if test="prevLinkUNID != null">PREV_LINK_UNID,</if>
+            <if test="dataId != null">DATA_ID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="routerId != null">#{routerId},</if>
+            <if test="fromAreaCode != null">#{fromAreaCode},</if>
+            <if test="fromAreaName != null">#{fromAreaName},</if>
+            <if test="toAreaCode != null">#{toAreaCode},</if>
+            <if test="toAreaName != null">#{toAreaName},</if>
+            <if test="targetSystem != null">#{targetSystem},</if>
+            <if test="sendTime != null">#{sendTime},</if>
+            <if test="prevLinkUNID != null">#{prevLinkUNID},</if>
+            <if test="dataId != null">#{dataId},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="apasInfoMap" type="com.tch.system.entity.convert2xml.ConvertEntityApasInfo">
+        <id column="APASINFO_ID" property="apasInfoId"/>
+        <result column="PROJECT_CODE" property="projectCode"/>
+        <result column="FROM_CODE" property="fromCode"/>
+        <result column="SWB_SERVICE_ID" property="swbServiceID"/>
+        <result column="SWB_MATTER_ID" property="swbMatterID"/>
+        <result column="SWB_MATTER_NAME" property="swbMatterName"/>
+        <result column="SRC_MATTER_ID" property="srcMatterID"/>
+        <result column="AREA_CODE" property="areaCode"/>
+        <result column="PROJECT_NAME" property="projectName"/>
+        <result column="PROMISE_DAY" property="promiseDay"/>
+        <result column="PROMISE_DAY_UNIT" property="promiseDayUnit"/>
+        <result column="SWB_SN" property="swbSN"/>
+        <result column="SRC_SN" property="srcSN"/>
+        <result column="VERSION" property="version"/>
+        <result column="PWD" property="pwd"/>
+        <result column="DECLARE_TIME" property="declareTime"/>
+        <result column="RECEIVE_DEPT_NAME" property="receiveDeptName"/>
+        <result column="RECEIVE_DEPT_CODE" property="receiveDeptCode"/>
+        <result column="ACCEPT_ADDRESS" property="acceptAddress"/>
+        <result column="SUB_WAY" property="subWay"/>
+        <result column="QUEUING_NO" property="queuingNo"/>
+        <result column="CENTRAL_APPROVAL_ITEMID" property="centralApprovalItemid"/>
+        <result column="REL_ITEM_FLAG" property="relItemFlag"/>
+        <result column="REL_DEPT_CODE" property="relDeptCode"/>
+        <result column="REL_CENTRAL_ITEM_CODE" property="relCentralItemCode"/>
+        <result column="CLASS_UNID" property="classUnid"/>
+        <result column="CLASS_NAME" property="className"/>
+        <result column="BUSISYSINFO_UUID" property="busISysInfoUuid"/>
+        <result column="SWBSERVICE_TYPE" property="swbServiceType"/>
+        <result column="SWBMATTE_TYPE" property="swbMatteType"/>
+        <result column="TYSJM" property="tysjm"/>
+    </resultMap>
+
+
+    <select id="selectByApasInfobusISysInfoUuid"
+            resultType="com.tch.system.entity.convert2xml.ConvertEntityApasInfo"
+            resultMap="apasInfoMap">
+        SELECT APASINFO_ID,
+               PROJECT_CODE,
+               FROM_CODE,
+               SWB_SERVICE_ID,
+               SWB_MATTER_ID,
+               SWB_MATTER_NAME,
+               SRC_MATTER_ID,
+               AREA_CODE,
+               PROJECT_NAME,
+               PROMISE_DAY,
+               PROMISE_DAY_UNIT,
+               SWB_SN,
+               SRC_SN,
+               VERSION,
+               PWD,
+               DECLARE_TIME,
+               RECEIVE_DEPT_NAME,
+               RECEIVE_DEPT_CODE,
+               ACCEPT_ADDRESS,
+               SUB_WAY,
+               QUEUING_NO,
+               CENTRAL_APPROVAL_ITEMID,
+               REL_ITEM_FLAG,
+               REL_DEPT_CODE,
+               REL_CENTRAL_ITEM_CODE,
+               CLASS_UNID,
+               CLASS_NAME,
+               BUSISYSINFO_UUID,
+               SWBSERVICE_TYPE,
+               SWBMATTE_TYPE,
+               TYSJM
+        FROM HLWJ.WSSP_APASINFO
+        where BUSISYSINFO_UUID = #{busISysInfoUuid}
+
+    </select>
+
+    <insert id="insertApasInfo" parameterType="com.tch.system.entity.convert2xml.ConvertEntityApasInfo">
+        INSERT INTO HLWJ.WSSP_APASINFO
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="apasInfoId != null">APASINFO_ID,</if>
+            <if test="projectCode != null">PROJECT_CODE,</if>
+            <if test="fromCode != null">FROM_CODE,</if>
+            <if test="swbServiceID != null">SWB_SERVICE_ID,</if>
+            <if test="swbMatterID != null">SWB_MATTER_ID,</if>
+            <if test="swbMatterName != null">SWB_MATTER_NAME,</if>
+            <if test="srcMatterID != null">SRC_MATTER_ID,</if>
+            <if test="areaCode != null">AREA_CODE,</if>
+            <if test="projectName != null">PROJECT_NAME,</if>
+            <if test="promiseDay != null">PROMISE_DAY,</if>
+            <if test="promiseDayUnit != null">PROMISE_DAY_UNIT,</if>
+            <if test="swbSN != null">SWB_SN,</if>
+            <if test="srcSN != null">SRC_SN,</if>
+            <if test="version != null">VERSION,</if>
+            <if test="pwd != null">PWD,</if>
+            <if test="declareTime != null">DECLARE_TIME,</if>
+            <if test="receiveDeptName != null">RECEIVE_DEPT_NAME,</if>
+            <if test="receiveDeptCode != null">RECEIVE_DEPT_CODE,</if>
+            <if test="acceptAddress != null">ACCEPT_ADDRESS,</if>
+            <if test="subWay != null">SUB_WAY,</if>
+            <if test="queuingNo != null">QUEUING_NO,</if>
+            <if test="centralApprovalItemid != null">CENTRAL_APPROVAL_ITEMID,</if>
+            <if test="relItemFlag != null">REL_ITEM_FLAG,</if>
+            <if test="relDeptCode != null">REL_DEPT_CODE,</if>
+            <if test="relCentralItemCode != null">REL_CENTRAL_ITEM_CODE,</if>
+            <if test="classUnid != null">CLASS_UNID,</if>
+            <if test="className != null">CLASS_NAME,</if>
+            <if test="busISysInfoUuid != null">BUSISYSINFO_UUID,</if>
+            <if test="swbServiceType != null">SWBSERVICE_TYPE,</if>
+            <if test="swbMatteType != null">SWBMATTE_TYPE,</if>
+            <if test="tysjm != null">TYSJM,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="apasInfoId != null">#{apasInfoId},</if>
+            <if test="projectCode != null">#{projectCode},</if>
+            <if test="fromCode != null">#{fromCode},</if>
+            <if test="swbServiceID != null">#{swbServiceID},</if>
+            <if test="swbMatterID != null">#{swbMatterID},</if>
+            <if test="swbMatterName != null">#{swbMatterName},</if>
+            <if test="srcMatterID != null">#{srcMatterID},</if>
+            <if test="areaCode != null">#{areaCode},</if>
+            <if test="projectName != null">#{projectName},</if>
+            <if test="promiseDay != null">#{promiseDay},</if>
+            <if test="promiseDayUnit != null">#{promiseDayUnit},</if>
+            <if test="swbSN != null">#{swbSN},</if>
+            <if test="srcSN != null">#{srcSN},</if>
+            <if test="version != null">#{version},</if>
+            <if test="pwd != null">#{pwd},</if>
+            <if test="declareTime != null">#{declareTime},</if>
+            <if test="receiveDeptName != null">#{receiveDeptName},</if>
+            <if test="receiveDeptCode != null">#{receiveDeptCode},</if>
+            <if test="acceptAddress != null">#{acceptAddress},</if>
+            <if test="subWay != null">#{subWay},</if>
+            <if test="queuingNo != null">#{queuingNo},</if>
+            <if test="centralApprovalItemid != null">#{centralApprovalItemid},</if>
+            <if test="relItemFlag != null">#{relItemFlag},</if>
+            <if test="relDeptCode != null">#{relDeptCode},</if>
+            <if test="relCentralItemCode != null">#{relCentralItemCode},</if>
+            <if test="classUnid != null">#{classUnid},</if>
+            <if test="className != null">#{className},</if>
+            <if test="busISysInfoUuid != null">#{busISysInfoUuid},</if>
+            <if test="swbServiceType != null">#{swbServiceType},</if>
+            <if test="swbMatteType != null">#{swbMatteType},</if>
+            <if test="tysjm != null">#{tysjm},</if>
+        </trim>
+    </insert>
+
+    <resultMap id="cloudFormMap" type="com.tch.system.entity.convert2xml.CloudForm">
+        <id column="CLOUD_FORM_ID" property="cloudFormId"/>
+        <result column="INTRANET_URL" property="intranetUrl"/>
+        <result column="OUTERNET_URL" property="outernetUrl"/>
+        <result column="BUSISYSINFO_UUID" property="busISysInfoUuid"/>
+    </resultMap>
+
+    <select id="selectCloudFormByUnId" resultType="com.tch.system.entity.convert2xml.CloudForm"
+            resultMap="cloudFormMap">
+        SELECT CLOUD_FORM_ID, INTRANET_URL, OUTERNET_URL, BUSISYSINFO_UUID
+        FROM HLWJ.WSSP_CLOUD_FORM
+        where BUSISYSINFO_UUID = #{busISysInfoUuid}
+
+    </select>
+
+
+    <insert id="insertCloudForm" parameterType="com.tch.system.entity.convert2xml.CloudForm">
+        INSERT INTO HLWJ.WSSP_CLOUD_FORM
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cloudFormId != null">CLOUD_FORM_ID,</if>
+            <if test="intranetUrl != null">INTRANET_URL,</if>
+            <if test="outernetUrl != null">OUTERNET_URL,</if>
+            <if test="busISysInfoUuid != null">BUSISYSINFO_UUID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cloudFormId != null">#{cloudFormId},</if>
+            <if test="intranetUrl != null">#{intranetUrl},</if>
+            <if test="outernetUrl != null">#{outernetUrl},</if>
+            <if test="busISysInfoUuid != null">#{busISysInfoUuid},</if>
+        </trim>
+    </insert>
+    <sql id="selecConvertBasetData">
+        select APPLY_FROM,
+               WSSP_DATA_TYPE,
+               UNID,
+               XSD,
+               RESOURCEINFO_TYPE,
+               OPERATION_LOGO,
+               TRANSFER_LOGO
+        from HLWJ.CONVERT_DATA
+    </sql>
+
+    <resultMap id="convertEntityMap" type="com.tch.system.entity.convert2xml.ConvertEntity">
+        <result column="APPLY_FROM" property="applyFrom"/>
+        <result column="WSSP_DATA_TYPE" property="type"/>
+        <result column="UNID" property="unid"/>
+        <result column="XSD" property="xsd"/>
+        <result column="RESOURCEINFO_TYPE" property="resourceInfoType"/>
+        <result column="OPERATION_LOGO" property="operationLogo"/>
+        <result column="TRANSFER_LOGO" property="transferLogo"/>
+    </resultMap>
+
+    <select id="selectConvertBaseData" resultType="com.tch.system.entity.common.ConvertBaseData"
+            resultMap="convertEntityMap">
+        <include refid="selecConvertBasetData"/>
+        <where>
+            <if test="applyFrom != null  and applyFrom != ''">and APPLY_FROM = #{applyFrom}</if>
+            <if test="type != null  and type != ''">and WSSP_DATA_TYPE = #{type}</if>
+            <if test="unid != null  and unid != ''">and UNID = #{unid}</if>
+            <if test="xsd != null  and xsd != ''">and XSD = #{xsd}</if>
+            <if test="resourceInfoType != null  and resourceInfoType != ''">and RESOURCEINFO_TYPE =
+                #{resourceInfoType}
+            </if>
+            <if test="operationLogo != null  and operationLogo != ''">and OPERATION_LOGO = #{operationLogo}</if>
+            <if test="transferLogo != null  and transferLogo != ''">and TRANSFER_LOGO = #{transferLogo}</if>
+        </where>
+    </select>
+
+
+    <update id="updateConvertBaseData" parameterType="com.tch.system.entity.common.ConvertBaseData">
+        update HLWJ.CONVERT_DATA
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="applyFrom != null  and applyFrom != ''">APPLY_FROM = #{applyFrom},</if>
+            <if test="type != null  and type != ''">WSSP_DATA_TYPE = #{type},</if>
+            <if test="unid != null  and unid != ''">UNID = #{unid},</if>
+            <if test="xsd != null  and xsd != ''">XSD = #{xsd},</if>
+            <if test="resourceInfoType != null  and resourceInfoType != ''">RESOURCEINFO_TYPE = #{resourceInfoType},
+            </if>
+            <if test="operationLogo != null  and operationLogo != ''">OPERATION_LOGO = #{operationLogo},</if>
+            <if test="transferLogo != null"> TRANSFER_LOGO = #{transferLogo}</if>
+        </trim>
+        where UNID = #{unid}
+    </update>
+
+
+    <update id="updateConvertBaseDataList" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";">
+            update HLWJ.CONVERT_DATA
+            <trim prefix="SET" suffixOverrides=",">
+                <if test="item.applyFrom != null  and item.applyFrom != ''">APPLY_FROM = #{item.applyFrom},</if>
+                <if test="item.type != null  and item.type != ''">WSSP_DATA_TYPE = #{item.type},</if>
+                <if test="item.unid != null  and item.unid != ''">UNID = #{item.unid},</if>
+                <if test="item.xsd != null  and item.xsd != ''">XSD = #{item.xsd},</if>
+                <if test="item.resourceInfoType != null  and item.resourceInfoType != ''">RESOURCEINFO_TYPE =
+                    #{item.resourceInfoType},
+                </if>
+                <if test="item.operationLogo != null  and item.operationLogo != ''">OPERATION_LOGO =
+                    #{item.operationLogo},
+                </if>
+            </trim>
+            where UNID = #{item.unid}
+        </foreach>
+    </update>
+
+    <select id="selectConvertBaseDataUnid" resultType="com.tch.system.entity.common.ConvertBaseData"
+            resultMap="convertEntityMap">
+        <include refid="selecConvertBasetData"/>
+        where UNID=#{unid}
+    </select>
+
+
+    <select id="selectConvertBaseDataByType" resultType="com.tch.system.entity.common.ConvertBaseData"
+            resultMap="convertEntityMap">
+        <include refid="selecConvertBasetData"/>
+        where WSSP_DATA_TYPE=#{type}
+    </select>
+    <select id="selectByApplyFrom" resultType="com.tch.system.entity.common.ConvertBaseData"
+            resultMap="convertEntityMap">
+        <include refid="selecConvertBasetData"/>
+        where WSSP_DATA_TYPE='210' AND TRANSFER_LOGO IS NULL AND ROWNUM &lt;= 5
+    </select>
+
+
+    <insert id="insertConvertEntity" parameterType="com.tch.system.entity.common.ConvertBaseData">
+        INSERT INTO HLWJ.CONVERT_DATA
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="applyFrom != null">APPLY_FROM,</if>
+            <if test="type != null">WSSP_DATA_TYPE,</if>
+            <if test="unid != null">UNID,</if>
+            <if test="xsd != null">XSD,</if>
+            <if test="resourceInfoType != null">RESOURCEINFO_TYPE,</if>
+            <if test="operationLogo != null">OPERATION_LOGO,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="applyFrom != null">#{applyFrom},</if>
+            <if test="type != null">#{type},</if>
+            <if test="unid != null">#{unid},</if>
+            <if test="xsd != null">#{xsd},</if>
+            <if test="resourceInfoType != null">#{resourceInfoType},</if>
+            <if test="operationLogo != null">#{operationLogo},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="documentMap" type="com.tch.system.entity.common.CovertDocument">
+        <id column="DOCUMENT_ID" property="documentId"/>
+        <result column="DOC_UNID" property="docUNID"/>
+        <result column="SWB_TYPE" property="swbType"/>
+        <result column="SRC_TYPE" property="srcType"/>
+        <result column="DOC_TYPE" property="docType"/>
+        <result column="DOC_NAME" property="docName"/>
+        <result column="DOC_NO" property="docNo"/>
+        <result column="DATA_ID" property="dataId"/>
+    </resultMap>
+
+
+    <select id="selectDocumentByDataId" resultType="com.tch.system.entity.common.CovertDocument"
+            resultMap="documentMap">
+        SELECT DOCUMENT_ID,
+               DOC_UNID,
+               SWB_TYPE,
+               SRC_TYPE,
+               DOC_TYPE,
+               DOC_NAME,
+               DOC_NO,
+               DATA_ID
+        FROM HLWJ.DOCUMENT
+        where DATA_ID = #{dataId}
+    </select>
+
+
+    <insert id="insertDocument" parameterType="com.tch.system.entity.common.CovertDocument">
+        INSERT INTO HLWJ.DOCUMENT
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="documentId != null">DOCUMENT_ID,</if>
+            <if test="docUNID != null">DOC_UNID,</if>
+            <if test="swbType != null">SWB_TYPE,</if>
+            <if test="srcType != null">SRC_TYPE,</if>
+            <if test="docType != null">DOC_TYPE,</if>
+            <if test="docName != null">DOC_NAME,</if>
+            <if test="docNo != null">DOC_NO,</if>
+            <if test="dataId != null">DATA_ID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="documentId != null">#{documentId},</if>
+            <if test="docUNID != null">#{docUNID},</if>
+            <if test="swbType != null">#{swbType},</if>
+            <if test="srcType != null">#{srcType},</if>
+            <if test="docType != null">#{docType},</if>
+            <if test="docName != null">#{docName},</if>
+            <if test="docNo != null">#{docNo},</if>
+            <if test="dataId != null">#{dataId},</if>
+        </trim>
+    </insert>
+
+    <resultMap id="expressMap" type="com.tch.system.entity.convert2xml.Express">
+        <id column="EXPRESS_ID" property="expressId"/>
+        <result column="RECIPIENTS" property="recipients"/>
+        <result column="R_CITY" property="rCity"/>
+        <result column="R_ADDRESS" property="rAddress"/>
+        <result column="R_AREA_CODE" property="rAreaCode"/>
+        <result column="R_MOBILE" property="rMobile"/>
+        <result column="R_CONTACT_NUMBER" property="rContactNumber"/>
+        <result column="R_PAY_TYPE" property="rPayType"/>
+        <result column="BUSISYSINFO_UUID" property="busISysInfoUuid"/>
+    </resultMap>
+
+    <select id="selectExpressByUuid" resultType="com.tch.system.entity.convert2xml.Express"
+            resultMap="expressMap">
+        SELECT EXPRESS_ID,
+               RECIPIENTS,
+               R_CITY,
+               R_ADDRESS,
+               R_AREA_CODE,
+               R_MOBILE,
+               R_CONTACT_NUMBER,
+               R_PAY_TYPE,
+               BUSISYSINFO_UUID
+        FROM HLWJ.WSSP_EXPRESS
+        where BUSISYSINFO_UUID = #{busISysInfoUuid}
+
+
+    </select>
+    <insert id="insertExpress" parameterType="com.tch.system.entity.convert2xml.Express">
+        INSERT INTO HLWJ.WSSP_EXPRESS
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="expressId != null">EXPRESS_ID,</if>
+            <if test="recipients != null">RECIPIENTS,</if>
+            <if test="rCity != null">R_CITY,</if>
+            <if test="rAddress != null">R_ADDRESS,</if>
+            <if test="rAreaCode != null">R_AREA_CODE,</if>
+            <if test="rMobile != null">R_MOBILE,</if>
+            <if test="rContactNumber != null">R_CONTACT_NUMBER,</if>
+            <if test="rPayType != null">R_PAY_TYPE,</if>
+            <if test="busISysInfoUuid != null">BUSISYSINFO_UUID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="expressId != null">#{expressId},</if>
+            <if test="recipients != null">#{recipients},</if>
+            <if test="rCity != null">#{rCity},</if>
+            <if test="rAddress != null">#{rAddress},</if>
+            <if test="rAreaCode != null">#{rAreaCode},</if>
+            <if test="rMobile != null">#{rMobile},</if>
+            <if test="rContactNumber != null">#{rContactNumber},</if>
+            <if test="rPayType != null">#{rPayType},</if>
+            <if test="busISysInfoUuid != null">#{busISysInfoUuid},</if>
+        </trim>
+    </insert>
+
+    <resultMap id="extendMap" type="com.tch.system.entity.convert2xml.Extend">
+        <id column="EXTEND_ID" property="extendId"/>
+        <result column="IS_AGENT_SERVICE" property="isAgentService"/>
+        <result column="AGENT_SERVICE_CHARGE" property="agentServiceCharge"/>
+        <result column="BACKFLOW" property="backflow"/>
+        <result column="GZCNSP_FLAG" property="gzcnspFlag"/>
+        <result column="GZCNSP_FILE_UNID" property="gzcnspFileUnid"/>
+        <result column="GZCNSP_FILE_NAME" property="gzcnspFileName"/>
+        <result column="AGENT_SOURCE_AREA" property="agentSourceArea"/>
+        <result column="CERTIFIED_IS_WRITE_OFF" property="certifiedIsWriteOff"/>
+        <result column="BUSISYSINFO_UUID" property="busISysInfoUuid"/>
+    </resultMap>
+
+
+    <select id="selectExtendByUuid" resultType="com.tch.system.entity.convert2xml.Extend"
+            resultMap="extendMap">
+        SELECT EXTEND_ID,
+               IS_AGENT_SERVICE,
+               AGENT_SERVICE_CHARGE,
+               BACKFLOW,
+               GZCNSP_FLAG,
+               GZCNSP_FILE_UNID,
+               GZCNSP_FILE_NAME,
+               AGENT_SOURCE_AREA,
+               CERTIFIED_IS_WRITE_OFF,
+               BUSISYSINFO_UUID,
+               BACKFLOW_SYSTEM
+        FROM HLWJ.WSSP_EXTEND
+        where BUSISYSINFO_UUID = #{busISysInfoUuid}
+
+
+    </select>
+
+    <insert id="insertExtend" parameterType="com.tch.system.entity.convert2xml.Extend">
+        INSERT INTO HLWJ.WSSP_EXTEND
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="extendId != null">EXTEND_ID,</if>
+            <if test="isAgentService != null">IS_AGENT_SERVICE,</if>
+            <if test="agentServiceCharge != null">AGENT_SERVICE_CHARGE,</if>
+            <if test="backflow != null">BACKFLOW,</if>
+            <if test="gzcnspFlag != null">GZCNSP_FLAG,</if>
+            <if test="gzcnspFileUnid != null">GZCNSP_FILE_UNID,</if>
+            <if test="gzcnspFileName != null">GZCNSP_FILE_NAME,</if>
+            <if test="agentSourceArea != null">AGENT_SOURCE_AREA,</if>
+            <if test="certifiedIsWriteOff != null">CERTIFIED_IS_WRITE_OFF,</if>
+            <if test="busISysInfoUuid != null">BUSISYSINFO_UUID,</if>
+            <if test="backflowSystem != null">BACKFLOW_SYSTEM,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="extendId != null">#{extendId},</if>
+            <if test="isAgentService != null">#{isAgentService},</if>
+            <if test="agentServiceCharge != null">#{agentServiceCharge},</if>
+            <if test="backflow != null">#{backflow},</if>
+            <if test="gzcnspFlag != null">#{gzcnspFlag},</if>
+            <if test="gzcnspFileUnid != null">#{gzcnspFileUnid},</if>
+            <if test="gzcnspFileName != null">#{gzcnspFileName},</if>
+            <if test="agentSourceArea != null">#{agentSourceArea},</if>
+            <if test="certifiedIsWriteOff != null">#{certifiedIsWriteOff},</if>
+            <if test="busISysInfoUuid != null">#{busISysInfoUuid},</if>
+            <if test="backflowSystem != null">#{backflowSystem},</if>
+        </trim>
+    </insert>
+
+    <!--通用方法 -->
+    <resultMap id="formInfoMap" type="com.tch.system.entity.common.CovertFormInfo">
+        <id column="FORM_INFO_ID" property="formInfoId"/>
+        <result column="UNID" property="unid"/>
+        <result column="FORM_NAME" property="formName"/>
+        <result column="FORM_ALIAS" property="formAlias"/>
+        <result column="BUSISYSINFO_UUID" property="busISysInfoUuid"/>
+    </resultMap>
+
+    <resultMap id="formDTOInfoMap" type="com.tch.system.dto.converts.CovertFormInfoDTO">
+        <id column="FORM_INFO_ID" property="formInfoId"/>
+        <result column="UNID" property="unid"/>
+        <result column="FORM_NAME" property="formName"/>
+        <result column="FORM_ALIAS" property="formAlias"/>
+        <result column="BUSISYSINFO_UUID" property="busISysInfoUuid"/>
+    </resultMap>
+
+    <select id="selectFormInfoByDataId" resultType="com.tch.system.dto.converts.CovertFormInfoDTO"
+            resultMap="formDTOInfoMap">
+        SELECT FORM_INFO_ID, UNID, FORM_NAME, FORM_ALIAS, BUSISYSINFO_UUID
+        FROM HLWJ.FORM_INFO
+        where BUSISYSINFO_UUID = #{busISysInfoUuid}
+    </select>
+
+    <insert id="insertFormInfo" parameterType="com.tch.system.entity.common.CovertFormInfo">
+        INSERT INTO HLWJ.FORM_INFO
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="formInfoId != null">FORM_INFO_ID,</if>
+            <if test="unid != null">UNID,</if>
+            <if test="formName != null">FORM_NAME,</if>
+            <if test="formAlias != null">FORM_ALIAS,</if>
+            <if test="busISysInfoUuid != null">BUSISYSINFO_UUID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="formInfoId != null">#{formInfoId},</if>
+            <if test="unid != null">#{unid},</if>
+            <if test="formName != null">#{formName},</if>
+            <if test="formAlias != null">#{formAlias},</if>
+            <if test="busISysInfoUuid != null">#{busISysInfoUuid},</if>
+        </trim>
+    </insert>
+
+    <!--通用方法 -->
+    <resultMap id="itemMap" type="com.tch.system.entity.common.CovertItem">
+        <id column="ITEM_ID" property="itemId"/>
+        <result column="ALIAS" property="alias"/>
+        <result column="FIELD" property="field"/>
+        <result column="ITEM_VALUE" property="value"/>
+        <result column="DATA_ID" property="dataId"/>
+    </resultMap>
+
+    <select id="selectItemByDataId" resultType="com.tch.system.entity.common.CovertItem"
+            resultMap="itemMap">
+        SELECT ITEM_ID, ALIAS, FIELD, ITEM_VALUE, DATA_ID
+        FROM HLWJ.FORM_INFO_ITEM
+        where DATA_ID = #{dataId}
+
+    </select>
+
+    <insert id="insertItem" parameterType="com.tch.system.entity.common.CovertItem">
+        INSERT INTO HLWJ.FORM_INFO_ITEM
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="itemId != null">ITEM_ID,</if>
+            <if test="alias != null">ALIAS,</if>
+            <if test="field != null">FIELD,</if>
+            <if test="value != null">ITEM_VALUE,</if>
+            <if test="dataId != null">DATA_ID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="itemId != null">#{itemId},</if>
+            <if test="alias != null">#{alias},</if>
+            <if test="field != null">#{field},</if>
+            <if test="value != null">#{value},</if>
+            <if test="dataId != null">#{dataId},</if>
+        </trim>
+    </insert>
+
+    <resultMap id="operatorMap" type="com.tch.system.entity.convert2xml.Operator">
+        <id column="OPERATOR_ID" property="operatorId"/>
+        <result column="OPERATOR_APPLY_NAME" property="operatorApplyName"/>
+        <result column="OPERATOR_SEX" property="operatorSex"/>
+        <result column="OPERATOR_BIRTHDAY" property="operatorBirthday"/>
+        <result column="OPERATOR_CERTIFICATE_TYPE" property="operatorCertificateType"/>
+        <result column="OPERATOR_CERTIFICATE_NAME" property="operatorCertificateName"/>
+        <result column="OPERATOR_CERTIFICATE_NUMBER" property="operatorCertificateNumber"/>
+        <result column="OPERATOR_ADDRESS" property="operatorAddress"/>
+        <result column="OPERATOR_POSTCODE" property="operatorPostcode"/>
+        <result column="OPERATOR_MOBILE_PHONE" property="operatorMobilePhone"/>
+        <result column="OPERATOR_MAIL" property="operatorMail"/>
+        <result column="OPERATOR_TEL" property="operatorTel"/>
+        <result column="BUSISYSINFO_UUID" property="busISysInfoUuid"/>
+    </resultMap>
+
+    <insert id="insertOperator" parameterType="com.tch.system.entity.convert2xml.Operator">
+        INSERT INTO HLWJ.WSSP_OPERATOR
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="operatorId != null">OPERATOR_ID,</if>
+            <if test="operatorApplyName != null">OPERATOR_APPLY_NAME,</if>
+            <if test="operatorSex != null">OPERATOR_SEX,</if>
+            <if test="operatorBirthday != null">OPERATOR_BIRTHDAY,</if>
+            <if test="operatorCertificateType != null">OPERATOR_CERTIFICATE_TYPE,</if>
+            <if test="operatorCertificateName != null">OPERATOR_CERTIFICATE_NAME,</if>
+            <if test="operatorCertificateNumber != null">OPERATOR_CERTIFICATE_NUMBER,</if>
+            <if test="operatorAddress != null">OPERATOR_ADDRESS,</if>
+            <if test="operatorPostcode != null">OPERATOR_POSTCODE,</if>
+            <if test="operatorMobilePhone != null">OPERATOR_MOBILE_PHONE,</if>
+            <if test="operatorMail != null">OPERATOR_MAIL,</if>
+            <if test="operatorTel != null">OPERATOR_TEL,</if>
+            <if test="busISysInfoUuid != null">BUSISYSINFO_UUID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="operatorId != null">#{operatorId},</if>
+            <if test="operatorApplyName != null">#{operatorApplyName},</if>
+            <if test="operatorSex != null">#{operatorSex},</if>
+            <if test="operatorBirthday != null">#{operatorBirthday},</if>
+            <if test="operatorCertificateType != null">#{operatorCertificateType},</if>
+            <if test="operatorCertificateName != null">#{operatorCertificateName},</if>
+            <if test="operatorCertificateNumber != null">#{operatorCertificateNumber},</if>
+            <if test="operatorAddress != null">#{operatorAddress},</if>
+            <if test="operatorPostcode != null">#{operatorPostcode},</if>
+            <if test="operatorMobilePhone != null">#{operatorMobilePhone},</if>
+            <if test="operatorMail != null">#{operatorMail},</if>
+            <if test="operatorTel != null">#{operatorTel},</if>
+            <if test="busISysInfoUuid != null">#{busISysInfoUuid},</if>
+        </trim>
+    </insert>
+
+    <select id="selectOperatorByUNID" resultType="com.tch.system.entity.convert2xml.Operator"
+            resultMap="operatorMap">
+        SELECT OPERATOR_ID,
+               OPERATOR_APPLY_NAME,
+               OPERATOR_SEX,
+               OPERATOR_BIRTHDAY,
+               OPERATOR_CERTIFICATE_TYPE,
+               OPERATOR_CERTIFICATE_NAME,
+               OPERATOR_CERTIFICATE_NUMBER,
+               OPERATOR_ADDRESS,
+               OPERATOR_POSTCODE,
+               OPERATOR_MOBILE_PHONE,
+               OPERATOR_MAIL,
+               OPERATOR_TEL,
+               BUSISYSINFO_UUID
+        FROM HLWJ.WSSP_OPERATOR
+        where BUSISYSINFO_UUID = #{busISysInfoUuid}
+
+    </select>
+
+
+    <resultMap id="proposerResultMap" type="com.tch.system.entity.convert2xml.Proposer">
+        <id column="PROPOSER_ID" property="proposerId"/>
+        <result column="APPLY_TYPE" property="applyType"/>
+        <result column="APPLY_OBJ_AREA_CODE" property="applyObjAreaCode"/>
+        <result column="BUSISYSINFO_UUID" property="busISysInfoUuid"/>
+    </resultMap>
+
+    <select id="selectProposerByUuId" resultType="com.tch.system.entity.convert2xml.Proposer"
+            resultMap="proposerResultMap">
+        SELECT PROPOSER_ID, APPLY_TYPE, APPLY_OBJ_AREA_CODE, BUSISYSINFO_UUID
+        FROM HLWJ.WSSP_PROPOSER
+        where BUSISYSINFO_UUID = #{busISysInfoUuid}
+    </select>
+    <insert id="insertProposer" parameterType="com.tch.system.entity.convert2xml.Proposer">
+        INSERT INTO HLWJ.WSSP_PROPOSER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="proposerId != null">PROPOSER_ID,</if>
+            <if test="applyType != null">APPLY_TYPE,</if>
+            <if test="applyObjAreaCode != null">APPLY_OBJ_AREA_CODE,</if>
+            <if test="busISysInfoUuid != null">BUSISYSINFO_UUID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="proposerId != null">#{proposerId},</if>
+            <if test="applyType != null">#{applyType},</if>
+            <if test="applyObjAreaCode != null">#{applyObjAreaCode},</if>
+            <if test="busISysInfoUuid != null">#{busISysInfoUuid},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="personMap" type="com.tch.system.entity.convert2xml.Person">
+        <id column="WSSP_PERSON_ID" property="wsspPersonId"/>
+        <result column="APPLYNAME" property="applyName"/>
+        <result column="SEX" property="sex"/>
+        <result column="BIRTHDAY" property="birthday"/>
+        <result column="CERTIFICATETYPE" property="certificateType"/>
+        <result column="CERTIFICATENAME" property="certificateName"/>
+        <result column="CERTIFICATENUMBER" property="certificateNumber"/>
+        <result column="ADDRESS" property="address"/>
+        <result column="POSTCODE" property="postcode"/>
+        <result column="MOBILEPHONE" property="mobilePhone"/>
+        <result column="MAIL" property="mail"/>
+        <result column="TEL" property="tel"/>
+        <result column="DATA_ID" property="dataId"/>
+    </resultMap>
+
+    <select id="selectPersonUNID" resultType="com.tch.system.entity.convert2xml.Person"
+            resultMap="personMap">
+        SELECT WSSP_PERSON_ID,
+               APPLYNAME,
+               SEX,
+               BIRTHDAY,
+               CERTIFICATETYPE,
+               CERTIFICATENAME,
+               CERTIFICATENUMBER,
+               ADDRESS,
+               POSTCODE,
+               MOBILEPHONE,
+               MAIL,
+               TEL,
+               DATA_ID
+        FROM HLWJ.WSSP_PERSON
+        where DATA_ID = #{dataId}
+
+    </select>
+
+
+    <insert id="insertPerson" parameterType="com.tch.system.entity.convert2xml.Person">
+        INSERT INTO HLWJ.WSSP_PERSON
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="wsspPersonId != null">WSSP_PERSON_ID,</if>
+            <if test="applyName != null">APPLYNAME,</if>
+            <if test="sex != null">SEX,</if>
+            <if test="birthday != null">BIRTHDAY,</if>
+            <if test="certificateType != null">CERTIFICATETYPE,</if>
+            <if test="certificateName != null">CERTIFICATENAME,</if>
+            <if test="certificateNumber != null">CERTIFICATENUMBER,</if>
+            <if test="address != null">ADDRESS,</if>
+            <if test="postcode != null">POSTCODE,</if>
+            <if test="mobilePhone != null">MOBILEPHONE,</if>
+            <if test="mail != null">MAIL,</if>
+            <if test="tel != null">TEL,</if>
+            <if test="dataId != null">DATA_ID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="wsspPersonId != null">#{wsspPersonId},</if>
+            <if test="applyName != null">#{applyName},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="birthday != null">#{birthday},</if>
+            <if test="certificateType != null">#{certificateType},</if>
+            <if test="certificateName != null">#{certificateName},</if>
+            <if test="certificateNumber != null">#{certificateNumber},</if>
+            <if test="address != null">#{address},</if>
+            <if test="postcode != null">#{postcode},</if>
+            <if test="mobilePhone != null">#{mobilePhone},</if>
+            <if test="mail != null">#{mail},</if>
+            <if test="tel != null">#{tel},</if>
+            <if test="dataId != null">#{dataId},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="unitMap" type="com.tch.system.entity.convert2xml.Unit">
+        <id column="UNIT_ID" property="unitId"/>
+        <result column="UNIT_NAME" property="unitName"/>
+        <result column="UNIT_CODE" property="unitCode"/>
+        <result column="UNIT_TYPE" property="unitType"/>
+        <result column="UNIT_IDCARD_TYPE" property="unitIdcardType"/>
+        <result column="LEAL_PERSON" property="lealPerson"/>
+        <result column="LEGAL_IDCARD_TYPE" property="legalIdcardType"/>
+        <result column="LEGAL_IDCARD" property="legalIdcard"/>
+        <result column="UNIT_ADDRESS" property="unitAddress"/>
+        <result column="UNIT_TEL" property="unitTel"/>
+        <result column="UNIT_POSTCODE" property="unitPostcode"/>
+        <result column="COMPANY_PHONE" property="companyPhone"/>
+        <result column="DATA_ID" property="dataId"/>
+    </resultMap>
+
+
+    <select id="selectUnitByDataId" resultType="com.tch.system.entity.convert2xml.Unit"
+            resultMap="unitMap">
+        SELECT UNIT_ID,
+               UNIT_NAME,
+               UNIT_CODE,
+               UNIT_TYPE,
+               UNIT_IDCARD_TYPE,
+               LEAL_PERSON,
+               LEGAL_IDCARD_TYPE,
+               LEGAL_IDCARD,
+               UNIT_ADDRESS,
+               UNIT_TEL,
+               UNIT_POSTCODE,
+               COMPANY_PHONE,
+               DATA_ID
+        FROM HLWJ.WSSP_UNIT
+        where DATA_ID = #{dataId}
+
+    </select>
+
+
+    <insert id="insertUnit" parameterType="com.tch.system.entity.convert2xml.Unit">
+        INSERT INTO HLWJ.WSSP_UNIT
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="unitId != null">UNIT_ID,</if>
+            <if test="unitName != null">UNIT_NAME,</if>
+            <if test="unitCode != null">UNIT_CODE,</if>
+            <if test="unitType != null">UNIT_TYPE,</if>
+            <if test="unitIdcardType != null">UNIT_IDCARD_TYPE,</if>
+            <if test="lealPerson != null">LEAL_PERSON,</if>
+            <if test="legalIdcardType != null">LEGAL_IDCARD_TYPE,</if>
+            <if test="legalIdcard != null">LEGAL_IDCARD,</if>
+            <if test="unitAddress != null">UNIT_ADDRESS,</if>
+            <if test="unitTel != null">UNIT_TEL,</if>
+            <if test="unitPostcode != null">UNIT_POSTCODE,</if>
+            <if test="companyPhone != null">COMPANY_PHONE,</if>
+            <if test="dataId != null">DATA_ID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="unitId != null">#{unitId},</if>
+            <if test="unitName != null">#{unitName},</if>
+            <if test="unitCode != null">#{unitCode},</if>
+            <if test="unitType != null">#{unitType},</if>
+            <if test="unitIdcardType != null">#{unitIdcardType},</if>
+            <if test="lealPerson != null">#{lealPerson},</if>
+            <if test="legalIdcardType != null">#{legalIdcardType},</if>
+            <if test="legalIdcard != null">#{legalIdcard},</if>
+            <if test="unitAddress != null">#{unitAddress},</if>
+            <if test="unitTel != null">#{unitTel},</if>
+            <if test="unitPostcode != null">#{unitPostcode},</if>
+            <if test="companyPhone != null">#{companyPhone},</if>
+            <if test="dataId != null">#{dataId},</if>
+        </trim>
+    </insert>
+
+    <resultMap id="smsMap" type="com.tch.system.entity.convert2xml.Sms">
+        <id column="SMS_ID" property="smsId"/>
+        <result column="SMS_RECEIVER" property="smsReceiver"/>
+        <result column="SMS_ADDRESS" property="smsAddress"/>
+        <result column="SMS_CONTENT" property="smsContent"/>
+        <result column="BUSISYSINFO_UUID" property="busISysInfoUuid"/>
+    </resultMap>
+
+
+    <select id="selectSmsByDUuid" resultType="com.tch.system.entity.convert2xml.Sms"
+            resultMap="smsMap">
+        SELECT SMS_ID, SMS_RECEIVER, SMS_ADDRESS, SMS_CONTENT, BUSISYSINFO_UUID
+        FROM HLWJ.WSSP_SMS
+        where BUSISYSINFO_UUID = #{busISysInfoUuid}
+
+
+    </select>
+    <select id="selectByApplyFromIsData" resultType="com.tch.system.entity.common.ConvertBaseData"
+                resultMap="convertEntityMap">
+            <include refid="selecConvertBasetData"/>
+            where  TRANSFER_LOGO IS NULL AND ROWNUM &lt;= 2500
+        </select>
+
+    <insert id="insertSms" parameterType="com.tch.system.entity.convert2xml.Sms">
+        INSERT INTO HLWJ.WSSP_SMS
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="smsId != null">SMS_ID,</if>
+            <if test="smsReceiver != null">SMS_RECEIVER,</if>
+            <if test="smsAddress != null">SMS_ADDRESS,</if>
+            <if test="smsContent != null">SMS_CONTENT,</if>
+            <if test="busISysInfoUuid != null">BUSISYSINFO_UUID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="smsId != null">#{smsId},</if>
+            <if test="smsReceiver != null">#{smsReceiver},</if>
+            <if test="smsAddress != null">#{smsAddress},</if>
+            <if test="smsContent != null">#{smsContent},</if>
+            <if test="busISysInfoUuid != null">#{busISysInfoUuid},</if>
+        </trim>
+    </insert>
+</mapper>

@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tch.system.mapper.DnTaskBasicMapper">
+
+    <resultMap type="com.tch.system.domain.DnTaskBasic" id="DnTaskBasicResult">
+        <result property="id" column="id"/>
+        <result property="rowGuid" column="row_guid"/>
+        <result property="taskName" column="task_name"/>
+        <result property="catalogCode" column="catalog_code"/>
+        <result property="localCatalogCode" column="local_catalog_code"/>
+        <result property="taskType" column="task_type"/>
+        <result property="byLaw" column="by_law"/>
+        <result property="powerSource" column="power_source"/>
+        <result property="useLevel" column="use_level"/>
+        <result property="taskCode" column="task_code"/>
+        <result property="localTaskCode" column="local_task_code"/>
+        <result property="taskHandleItem" column="task_handle_item"/>
+        <result property="taskState" column="task_state"/>
+        <result property="taskVersion" column="task_version"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="deptType" column="dept_type"/>
+        <result property="deptCode" column="dept_code"/>
+        <result property="entrustName" column="entrust_name"/>
+        <result property="anticipateDay" column="anticipate_day"/>
+        <result property="anticipateType" column="anticipate_type"/>
+        <result property="anticipateExplain" column="anticipate_explain"/>
+        <result property="promiseDay" column="promise_day"/>
+        <result property="promiseType" column="promise_type"/>
+        <result property="promiseExplain" column="promise_explain"/>
+        <result property="acceptCondition" column="accept_condition"/>
+        <result property="handleFlow" column="handle_flow"/>
+        <result property="isFee" column="is_fee"/>
+        <result property="feeBasis" column="fee_basis"/>
+        <result property="serverType" column="server_type"/>
+        <result property="projectType" column="project_type"/>
+        <result property="handleType" column="handle_type"/>
+        <result property="limitSceneNum" column="limit_scene_num"/>
+        <result property="specialProcedure" column="special_procedure"/>
+        <result property="appIsSingleLogin" column="app_is_single_login"/>
+        <result property="mobileTerminalUrl" column="mobile_terminal_url"/>
+        <result property="isSingleLogin" column="is_single_login"/>
+        <result property="linkAddr" column="link_addr"/>
+        <result property="transactAddr" column="transact_addr"/>
+        <result property="transactTime" column="transact_time"/>
+        <result property="linkWay" column="link_way"/>
+        <result property="superviseWay" column="supervise_way"/>
+        <result property="planEffectiveDate" column="plan_effective_date"/>
+        <result property="planCancelDate" column="plan_cancel_date"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="cjdw" column="cjdw"/>
+        <result property="gxdw" column="gxdw"/>
+        <result property="cdBatch" column="cd_batch"/>
+        <result property="cdOperation" column="cd_operation"/>
+        <result property="cdTime" column="cd_time"/>
+        <result property="dataSource" column="data_source"/>
+        <result property="dbbs" column="dbbs"/>
+        <result property="dbsj" column="dbsj"/>
+        <result property="signCa" column="sign_ca"/>
+        <result property="signData" column="sign_data"/>
+        <result property="systemNo" column="system_no"/>
+        <result property="handleConifgType" column="handle_conifg_type"/>
+        <result property="fieldConfigType" column="field_config_type"/>
+        <result property="flowConfigType" column="flow_config_type"/>
+        <result property="orgConfigType" column="org_config_type"/>
+        <result property="code" column="code"/>
+        <result property="serviceId" column="service_Id"/>
+        <result property="regionCode" column="region_code"/>
+        <result property="olditemId" column="olditem_id"/>
+        <result property="itemId" column="item_id"/>
+    </resultMap>
+
+    <sql id="selectDnTaskBasicVo">
+        select id,
+               row_guid,
+               task_name,
+               catalog_code,
+               local_catalog_code,
+               task_type,
+               by_law,
+               power_source,
+               use_level,
+               task_code,
+               local_task_code,
+               task_handle_item,
+               task_state,
+               task_version,
+               dept_name,
+               dept_type,
+               dept_code,
+               entrust_name,
+               anticipate_day,
+               anticipate_type,
+               anticipate_explain,
+               promise_day,
+               promise_type,
+               promise_explain,
+               accept_condition,
+               handle_flow,
+               is_fee,
+               fee_basis,
+               server_type,
+               project_type,
+               handle_type,
+               limit_scene_num,
+               special_procedure,
+               app_is_single_login,
+               mobile_terminal_url,
+               is_single_login,
+               link_addr,
+               transact_addr,
+               transact_time,
+               link_way,
+               supervise_way,
+               plan_effective_date,
+               plan_cancel_date,
+               update_time,
+               create_time,
+               cjdw,
+               gxdw,
+               cd_batch,
+               cd_operation,
+               cd_time,
+               data_source,
+               dbbs,
+               dbsj,
+               sign_ca,
+               sign_data,
+               system_no,
+               handle_conifg_type,
+               field_config_type,
+               flow_config_type,
+               org_config_type,
+               code,
+               service_id,
+               region_code,
+               olditem_id,
+               item_id
+        from JYXX.dn_task_basic
+    </sql>
+
+    <select id="selectDnTaskBasicList" parameterType="com.tch.system.domain.DnTaskBasic" resultMap="DnTaskBasicResult">
+        <include refid="selectDnTaskBasicVo"/>
+        <where>
+            <if test="rowGuid != null  and rowGuid != ''">and row_guid = #{rowGuid}</if>
+            <if test="taskName != null  and taskName != ''">and task_name like concat(concat('%', #{taskName}), '%')
+            </if>
+            <if test="catalogCode != null  and catalogCode != ''">and catalog_code = #{catalogCode}</if>
+            <if test="localCatalogCode != null  and localCatalogCode != ''">and local_catalog_code =
+                #{localCatalogCode}
+            </if>
+            <if test="taskType != null  and taskType != ''">and task_type = #{taskType}</if>
+            <if test="byLaw != null  and byLaw != ''">and by_law = #{byLaw}</if>
+            <if test="powerSource != null  and powerSource != ''">and power_source = #{powerSource}</if>
+            <if test="useLevel != null  and useLevel != ''">and use_level = #{useLevel}</if>
+            <if test="taskCode != null  and taskCode != ''">and task_code = #{taskCode}</if>
+            <if test="localTaskCode != null  and localTaskCode != ''">and local_task_code = #{localTaskCode}</if>
+            <if test="taskHandleItem != null  and taskHandleItem != ''">and task_handle_item = #{taskHandleItem}</if>
+            <if test="taskState != null  and taskState != ''">and task_state = #{taskState}</if>
+            <if test="taskVersion != null ">and task_version = #{taskVersion}</if>
+            <if test="deptName != null  and deptName != ''">and dept_name like concat(concat('%', #{deptName}), '%')
+            </if>
+            <if test="deptType != null  and deptType != ''">and dept_type = #{deptType}</if>
+            <if test="deptCode != null  and deptCode != ''">and dept_code = #{deptCode}</if>
+            <if test="entrustName != null  and entrustName != ''">and entrust_name like concat(concat('%',
+                #{entrustName}), '%')
+            </if>
+            <if test="anticipateDay != null ">and anticipate_day = #{anticipateDay}</if>
+            <if test="anticipateType != null  and anticipateType != ''">and anticipate_type = #{anticipateType}</if>
+            <if test="anticipateExplain != null  and anticipateExplain != ''">and anticipate_explain =
+                #{anticipateExplain}
+            </if>
+            <if test="promiseDay != null ">and promise_day = #{promiseDay}</if>
+            <if test="promiseType != null  and promiseType != ''">and promise_type = #{promiseType}</if>
+            <if test="promiseExplain != null  and promiseExplain != ''">and promise_explain = #{promiseExplain}</if>
+            <if test="acceptCondition != null  and acceptCondition != ''">and accept_condition = #{acceptCondition}</if>
+            <if test="handleFlow != null  and handleFlow != ''">and handle_flow = #{handleFlow}</if>
+            <if test="isFee != null  and isFee != ''">and is_fee = #{isFee}</if>
+            <if test="feeBasis != null  and feeBasis != ''">and fee_basis = #{feeBasis}</if>
+            <if test="serverType != null  and serverType != ''">and server_type = #{serverType}</if>
+            <if test="projectType != null  and projectType != ''">and project_type = #{projectType}</if>
+            <if test="handleType != null  and handleType != ''">and handle_type = #{handleType}</if>
+            <if test="limitSceneNum != null ">and limit_scene_num = #{limitSceneNum}</if>
+            <if test="specialProcedure != null  and specialProcedure != ''">and special_procedure =
+                #{specialProcedure}
+            </if>
+            <if test="appIsSingleLogin != null  and appIsSingleLogin != ''">and app_is_single_login =
+                #{appIsSingleLogin}
+            </if>
+            <if test="mobileTerminalUrl != null  and mobileTerminalUrl != ''">and mobile_terminal_url =
+                #{mobileTerminalUrl}
+            </if>
+            <if test="isSingleLogin != null  and isSingleLogin != ''">and is_single_login = #{isSingleLogin}</if>
+            <if test="linkAddr != null  and linkAddr != ''">and link_addr = #{linkAddr}</if>
+            <if test="transactAddr != null  and transactAddr != ''">and transact_addr = #{transactAddr}</if>
+            <if test="transactTime != null  and transactTime != ''">and transact_time = #{transactTime}</if>
+            <if test="linkWay != null  and linkWay != ''">and link_way = #{linkWay}</if>
+            <if test="superviseWay != null  and superviseWay != ''">and supervise_way = #{superviseWay}</if>
+            <if test="planEffectiveDate != null ">and plan_effective_date = #{planEffectiveDate}</if>
+            <if test="planCancelDate != null ">and plan_cancel_date = #{planCancelDate}</if>
+            <if test="cjdw != null  and cjdw != ''">and cjdw = #{cjdw}</if>
+            <if test="gxdw != null  and gxdw != ''">and gxdw = #{gxdw}</if>
+            <if test="cdBatch != null  and cdBatch != ''">and cd_batch = #{cdBatch}</if>
+            <if test="cdOperation != null  and cdOperation != ''">and cd_operation = #{cdOperation}</if>
+            <if test="cdTime != null ">and cd_time = #{cdTime}</if>
+            <if test="dataSource != null  and dataSource != ''">and data_source = #{dataSource}</if>
+            <if test="dbbs != null  and dbbs != ''">and dbbs = #{dbbs}</if>
+            <if test="dbsj != null ">and dbsj = #{dbsj}</if>
+            <if test="signCa != null  and signCa != ''">and sign_ca = #{signCa}</if>
+            <if test="signData != null  and signData != ''">and sign_data = #{signData}</if>
+            <if test="systemNo != null  and systemNo != ''">and system_no = #{systemNo}</if>
+            <if test="handleConifgType != null  and handleConifgType != ''">and handle_conifg_type =
+                #{handleConifgType}
+            </if>
+            <if test="fieldConfigType != null  and fieldConfigType != ''">and field_config_type = #{fieldConfigType}
+            </if>
+            <if test="flowConfigType != null  and flowConfigType != ''">and flow_config_type = #{flowConfigType}</if>
+            <if test="orgConfigType != null  and orgConfigType != ''">and org_config_type = #{orgConfigType}</if>
+            <if test="code != null  and code != ''">and code = #{code}</if>
+        </where>
+    </select>
+
+    <select id="selectDnTaskBasicById" parameterType="Long" resultMap="DnTaskBasicResult">
+        <include refid="selectDnTaskBasicVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertDnTaskBasic" parameterType="com.tch.system.domain.DnTaskBasic">
+        <!--        <selectKey keyProperty="id" resultType="long" order="BEFORE">-->
+        <!--            SELECT seq_dn_task_basic.NEXTVAL as id FROM DUAL-->
+        <!--        </selectKey>-->
+        insert into JYXX.dn_task_basic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="rowGuid != null">row_guid,</if>
+            <if test="taskName != null">task_name,</if>
+            <if test="catalogCode != null">catalog_code,</if>
+            <if test="localCatalogCode != null">local_catalog_code,</if>
+            <if test="taskType != null">task_type,</if>
+            <if test="byLaw != null">by_law,</if>
+            <if test="powerSource != null">power_source,</if>
+            <if test="useLevel != null">use_level,</if>
+            <if test="taskCode != null">task_code,</if>
+            <if test="localTaskCode != null">local_task_code,</if>
+            <if test="taskHandleItem != null">task_handle_item,</if>
+            <if test="taskState != null">task_state,</if>
+            <if test="taskVersion != null">task_version,</if>
+            <if test="deptName != null">dept_name,</if>
+            <if test="deptType != null">dept_type,</if>
+            <if test="deptCode != null">dept_code,</if>
+            <if test="entrustName != null">entrust_name,</if>
+            <if test="anticipateDay != null">anticipate_day,</if>
+            <if test="anticipateType != null">anticipate_type,</if>
+            <if test="anticipateExplain != null">anticipate_explain,</if>
+            <if test="promiseDay != null">promise_day,</if>
+            <if test="promiseType != null">promise_type,</if>
+            <if test="promiseExplain != null">promise_explain,</if>
+            <if test="acceptCondition != null">accept_condition,</if>
+            <if test="handleFlow != null">handle_flow,</if>
+            <if test="isFee != null">is_fee,</if>
+            <if test="feeBasis != null">fee_basis,</if>
+            <if test="serverType != null">server_type,</if>
+            <if test="projectType != null">project_type,</if>
+            <if test="handleType != null">handle_type,</if>
+            <if test="limitSceneNum != null">limit_scene_num,</if>
+            <if test="specialProcedure != null">special_procedure,</if>
+            <if test="appIsSingleLogin != null">app_is_single_login,</if>
+            <if test="mobileTerminalUrl != null">mobile_terminal_url,</if>
+            <if test="isSingleLogin != null">is_single_login,</if>
+            <if test="linkAddr != null">link_addr,</if>
+            <if test="transactAddr != null">transact_addr,</if>
+            <if test="transactTime != null">transact_time,</if>
+            <if test="linkWay != null">link_way,</if>
+            <if test="superviseWay != null">supervise_way,</if>
+            <if test="planEffectiveDate != null">plan_effective_date,</if>
+            <if test="planCancelDate != null">plan_cancel_date,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="cjdw != null">cjdw,</if>
+            <if test="gxdw != null">gxdw,</if>
+            <if test="cdBatch != null">cd_batch,</if>
+            <if test="cdOperation != null">cd_operation,</if>
+            <if test="cdTime != null">cd_time,</if>
+            <if test="dataSource != null">data_source,</if>
+            <if test="dbbs != null">dbbs,</if>
+            <if test="dbsj != null">dbsj,</if>
+            <if test="signCa != null">sign_ca,</if>
+            <if test="signData != null">sign_data,</if>
+            <if test="systemNo != null">system_no,</if>
+            <if test="handleConifgType != null">handle_conifg_type,</if>
+            <if test="fieldConfigType != null">field_config_type,</if>
+            <if test="flowConfigType != null">flow_config_type,</if>
+            <if test="orgConfigType != null">org_config_type,</if>
+            <if test="code != null">code,</if>
+            <if test="serviceId != null">service_id,</if>
+            <if test="regionCode != null">region_code,</if>
+            <if test="olditemId != null">olditem_id,</if>
+            <if test="itemId != null">item_id,</if>
+            <if test="assort != null">ASSORT,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="rowGuid != null">#{rowGuid},</if>
+            <if test="taskName != null">#{taskName},</if>
+            <if test="catalogCode != null">#{catalogCode},</if>
+            <if test="localCatalogCode != null">#{localCatalogCode},</if>
+            <if test="taskType != null">#{taskType},</if>
+            <if test="byLaw != null">#{byLaw},</if>
+            <if test="powerSource != null">#{powerSource},</if>
+            <if test="useLevel != null">#{useLevel},</if>
+            <if test="taskCode != null">#{taskCode},</if>
+            <if test="localTaskCode != null">#{localTaskCode},</if>
+            <if test="taskHandleItem != null">#{taskHandleItem},</if>
+            <if test="taskState != null">#{taskState},</if>
+            <if test="taskVersion != null">#{taskVersion},</if>
+            <if test="deptName != null">#{deptName},</if>
+            <if test="deptType != null">#{deptType},</if>
+            <if test="deptCode != null">#{deptCode},</if>
+            <if test="entrustName != null">#{entrustName},</if>
+            <if test="anticipateDay != null">#{anticipateDay},</if>
+            <if test="anticipateType != null">#{anticipateType},</if>
+            <if test="anticipateExplain != null">#{anticipateExplain},</if>
+            <if test="promiseDay != null">#{promiseDay},</if>
+            <if test="promiseType != null">#{promiseType},</if>
+            <if test="promiseExplain != null">#{promiseExplain},</if>
+            <if test="acceptCondition != null">#{acceptCondition},</if>
+            <if test="handleFlow != null">#{handleFlow},</if>
+            <if test="isFee != null">#{isFee},</if>
+            <if test="feeBasis != null">#{feeBasis},</if>
+            <if test="serverType != null">#{serverType},</if>
+            <if test="projectType != null">#{projectType},</if>
+            <if test="handleType != null">#{handleType},</if>
+            <if test="limitSceneNum != null">#{limitSceneNum},</if>
+            <if test="specialProcedure != null">#{specialProcedure},</if>
+            <if test="appIsSingleLogin != null">#{appIsSingleLogin},</if>
+            <if test="mobileTerminalUrl != null">#{mobileTerminalUrl},</if>
+            <if test="isSingleLogin != null">#{isSingleLogin},</if>
+            <if test="linkAddr != null">#{linkAddr},</if>
+            <if test="transactAddr != null">#{transactAddr},</if>
+            <if test="transactTime != null">#{transactTime},</if>
+            <if test="linkWay != null">#{linkWay},</if>
+            <if test="superviseWay != null">#{superviseWay},</if>
+            <if test="planEffectiveDate != null">#{planEffectiveDate},</if>
+            <if test="planCancelDate != null">#{planCancelDate},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="cjdw != null">#{cjdw},</if>
+            <if test="gxdw != null">#{gxdw},</if>
+            <if test="cdBatch != null">#{cdBatch},</if>
+            <if test="cdOperation != null">#{cdOperation},</if>
+            <if test="cdTime != null">#{cdTime},</if>
+            <if test="dataSource != null">#{dataSource},</if>
+            <if test="dbbs != null">#{dbbs},</if>
+            <if test="dbsj != null">#{dbsj},</if>
+            <if test="signCa != null">#{signCa},</if>
+            <if test="signData != null">#{signData},</if>
+            <if test="systemNo != null">#{systemNo},</if>
+            <if test="handleConifgType != null">#{handleConifgType},</if>
+            <if test="fieldConfigType != null">#{fieldConfigType},</if>
+            <if test="flowConfigType != null">#{flowConfigType},</if>
+            <if test="orgConfigType != null">#{orgConfigType},</if>
+            <if test="code != null">#{code},</if>
+            <if test="serviceId != null">#{serviceId},</if>
+            <if test="regionCode != null">#{regionCode},</if>
+            <if test="olditemId != null">#{olditemId},</if>
+            <if test="itemId != null">#{itemId},</if>
+            <if test="assort != null">#{assort},</if>
+        </trim>
+    </insert>
+
+    <update id="updateDnTaskBasic" parameterType="com.tch.system.domain.DnTaskBasic">
+        update JYXX.dn_task_basic
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="rowGuid != null">row_guid = #{rowGuid},</if>
+            <if test="taskName != null">task_name = #{taskName},</if>
+            <if test="catalogCode != null">catalog_code = #{catalogCode},</if>
+            <if test="localCatalogCode != null">local_catalog_code = #{localCatalogCode},</if>
+            <if test="taskType != null">task_type = #{taskType},</if>
+            <if test="byLaw != null">by_law = #{byLaw},</if>
+            <if test="powerSource != null">power_source = #{powerSource},</if>
+            <if test="useLevel != null">use_level = #{useLevel},</if>
+            <if test="taskCode != null">task_code = #{taskCode},</if>
+            <if test="localTaskCode != null">local_task_code = #{localTaskCode},</if>
+            <if test="taskHandleItem != null">task_handle_item = #{taskHandleItem},</if>
+            <if test="taskState != null">task_state = #{taskState},</if>
+            <if test="taskVersion != null">task_version = #{taskVersion},</if>
+            <if test="deptName != null">dept_name = #{deptName},</if>
+            <if test="deptType != null">dept_type = #{deptType},</if>
+            <if test="deptCode != null">dept_code = #{deptCode},</if>
+            <if test="entrustName != null">entrust_name = #{entrustName},</if>
+            <if test="anticipateDay != null">anticipate_day = #{anticipateDay},</if>
+            <if test="anticipateType != null">anticipate_type = #{anticipateType},</if>
+            <if test="anticipateExplain != null">anticipate_explain = #{anticipateExplain},</if>
+            <if test="promiseDay != null">promise_day = #{promiseDay},</if>
+            <if test="promiseType != null">promise_type = #{promiseType},</if>
+            <if test="promiseExplain != null">promise_explain = #{promiseExplain},</if>
+            <if test="acceptCondition != null">accept_condition = #{acceptCondition},</if>
+            <if test="handleFlow != null">handle_flow = #{handleFlow},</if>
+            <if test="isFee != null">is_fee = #{isFee},</if>
+            <if test="feeBasis != null">fee_basis = #{feeBasis},</if>
+            <if test="serverType != null">server_type = #{serverType},</if>
+            <if test="projectType != null">project_type = #{projectType},</if>
+            <if test="handleType != null">handle_type = #{handleType},</if>
+            <if test="limitSceneNum != null">limit_scene_num = #{limitSceneNum},</if>
+            <if test="specialProcedure != null">special_procedure = #{specialProcedure},</if>
+            <if test="appIsSingleLogin != null">app_is_single_login = #{appIsSingleLogin},</if>
+            <if test="mobileTerminalUrl != null">mobile_terminal_url = #{mobileTerminalUrl},</if>
+            <if test="isSingleLogin != null">is_single_login = #{isSingleLogin},</if>
+            <if test="linkAddr != null">link_addr = #{linkAddr},</if>
+            <if test="transactAddr != null">transact_addr = #{transactAddr},</if>
+            <if test="transactTime != null">transact_time = #{transactTime},</if>
+            <if test="linkWay != null">link_way = #{linkWay},</if>
+            <if test="superviseWay != null">supervise_way = #{superviseWay},</if>
+            <if test="planEffectiveDate != null">plan_effective_date = #{planEffectiveDate},</if>
+            <if test="planCancelDate != null">plan_cancel_date = #{planCancelDate},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="cjdw != null">cjdw = #{cjdw},</if>
+            <if test="gxdw != null">gxdw = #{gxdw},</if>
+            <if test="cdBatch != null">cd_batch = #{cdBatch},</if>
+            <if test="cdOperation != null">cd_operation = #{cdOperation},</if>
+            <if test="cdTime != null">cd_time = #{cdTime},</if>
+            <if test="dataSource != null">data_source = #{dataSource},</if>
+            <if test="dbbs != null">dbbs = #{dbbs},</if>
+            <if test="dbsj != null">dbsj = #{dbsj},</if>
+            <if test="signCa != null">sign_ca = #{signCa},</if>
+            <if test="signData != null">sign_data = #{signData},</if>
+            <if test="systemNo != null">system_no = #{systemNo},</if>
+            <if test="handleConifgType != null">handle_conifg_type = #{handleConifgType},</if>
+            <if test="fieldConfigType != null">field_config_type = #{fieldConfigType},</if>
+            <if test="flowConfigType != null">flow_config_type = #{flowConfigType},</if>
+            <if test="orgConfigType != null">org_config_type = #{orgConfigType},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="serviceId != null">#{serviceId},</if>
+            <if test="regionCode != null">#{regionCode},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDnTaskBasicById" parameterType="Long">
+        delete
+        from JYXX.dn_task_basic
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteDnTaskBasicByIds" parameterType="String">
+        delete from JYXX.dn_task_basic where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getByRowGuId" resultType="com.tch.system.domain.DnTaskBasic">
+        select *
+        from JYXX.dn_task_basic
+        where row_guid = #{rowGuid}
+    </select>
+    <select id="selectDnTaskBasicByCode" resultType="com.tch.system.domain.DnTaskBasic" resultMap="DnTaskBasicResult">
+        <include refid="selectDnTaskBasicVo"/>
+        where code = #{code}
+    </select>
+</mapper>

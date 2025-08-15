@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('caseUpload列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>办件编号：</label>
+                                <input type="text" name="sn"/>
+                            </li>
+                            <li>
+                                <label>数据推送方社会信用代码：</label>
+                                <input type="text" name="fromCode"/>
+                            </li>
+                            <li>
+                                <label>创建记录的系统时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择创建记录的系统时间" name="createdTime"/>
+                            </li>
+                            <li>
+                                <label>修改记录的系统时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择修改记录的系统时间" name="updatedTime"/>
+                            </li>
+                            <li>
+                                <label>记录的版本：</label>
+                                <input type="text" name="version"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:caseUpload:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:caseUpload:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:caseUpload:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:caseUpload:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:caseUpload:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:caseUpload:remove')}]];
+        var prefix = ctx + "system/caseUpload";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "caseUpload",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'provincePullDataAuditId',
+                    title: 'id',
+                    visible: false
+                },
+                {
+                    field: 'sn',
+                    title: '办件编号'
+                },
+                {
+                    field: 'fromCode',
+                    title: '数据推送方社会信用代码'
+                },
+                {
+                    field: 'wsspXml',
+                    title: '办件信息xml'
+                },
+                {
+                    field: 'nextXml',
+                    title: '过程信息xml'
+                },
+                {
+                    field: 'suspendXml',
+                    title: '计时暂停xml'
+                },
+                {
+                    field: 'resumeXml',
+                    title: '计时恢复xml'
+                },
+                {
+                    field: 'finishXml',
+                    title: '结果信息xml'
+                },
+                {
+                    field: 'expressXml',
+                    title: '邮递服务xml'
+                },
+                {
+                    field: 'auditTimestamp',
+                    title: '时间戳 格式：yyyy-MM-dd HH:mm:ss'
+                },
+                {
+                    field: 'createdTime',
+                    title: '创建记录的系统时间'
+                },
+                {
+                    field: 'updatedTime',
+                    title: '修改记录的系统时间'
+                },
+                {
+                    field: 'version',
+                    title: '记录的版本'
+                },
+                {
+                    field: 'createdUserId',
+                    title: '数据创建人ID'
+                },
+                {
+                    field: 'updatedUserId',
+                    title: '数据更新人ID'
+                },
+                {
+                    field: 'record',
+                    title: '${comment}'
+                },
+                {
+                    field: 'isReflux',
+                    title: '是否拉取至仲裁系统'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.provincePullDataAuditId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.provincePullDataAuditId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

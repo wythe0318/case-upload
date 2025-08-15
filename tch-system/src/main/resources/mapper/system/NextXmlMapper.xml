@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tch.system.mapper.NextXmlMapper">
+
+
+    <resultMap id="nextApasInfoResultMap" type="com.tch.system.entity.next2xml.NextConvertApasInfo">
+        <id column="NEXT_APAS_INFO_ID" property="nextApasInfoId"/>
+        <result column="PROJECT_CODE" property="projectCode"/>
+        <result column="APPLY_TYPE" property="applyType"/>
+        <result column="FROM_CODE" property="fromCode"/>
+        <result column="SWB_MATTER_ID" property="swbMatterID"/>
+        <result column="SWB_MATTER_NAME" property="swbMatterName"/>
+        <result column="SRC_MATTER_ID" property="srcMatterID"/>
+        <result column="AREA_CODE" property="areaCode"/>
+        <result column="PROJECT_NAME" property="projectName"/>
+        <result column="RECEIVE_DEPT_NAME" property="receiveDeptName"/>
+        <result column="RECEIVE_DEPT_CODE" property="receiveDeptCode"/>
+        <result column="SWB_SN" property="swbSN"/>
+        <result column="SRC_SN" property="srcSN"/>
+        <result column="SEQ_NO" property="seqNo"/>
+        <result column="VERSION" property="version"/>
+        <result column="BUSISYSINFO_UUID" property="busISysInfoUuid"/>
+    </resultMap>
+
+    <select id="selectNextApasInfoByUuId" resultType="com.tch.system.entity.next2xml.NextConvertApasInfo"
+            resultMap="nextApasInfoResultMap">
+        SELECT NEXT_APAS_INFO_ID,
+               PROJECT_CODE,
+               APPLY_TYPE,
+               FROM_CODE,
+               SWB_MATTER_ID,
+               SWB_MATTER_NAME,
+               SRC_MATTER_ID,
+               AREA_CODE,
+               PROJECT_NAME,
+               RECEIVE_DEPT_NAME,
+               RECEIVE_DEPT_CODE,
+               SWB_SN,
+               SRC_SN,
+               SEQ_NO,
+               VERSION,
+               BUSISYSINFO_UUID
+        FROM HLWJ.NEXT_APAS_INFO
+        where BUSISYSINFO_UUID = #{busISysInfoUuid}
+    </select>
+
+
+    <insert id="insertNextApasInfo" parameterType="com.tch.system.entity.next2xml.NextConvertApasInfo">
+        INSERT INTO HLWJ.NEXT_APAS_INFO
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nextApasInfoId != null">NEXT_APAS_INFO_ID,</if>
+            <if test="projectCode != null">PROJECT_CODE,</if>
+            <if test="applyType != null">APPLY_TYPE,</if>
+            <if test="fromCode != null">FROM_CODE,</if>
+            <if test="swbMatterID != null">SWB_MATTER_ID,</if>
+            <if test="swbMatterName != null">SWB_MATTER_NAME,</if>
+            <if test="srcMatterID != null">SRC_MATTER_ID,</if>
+            <if test="areaCode != null">AREA_CODE,</if>
+            <if test="projectName != null">PROJECT_NAME,</if>
+            <if test="receiveDeptName != null">RECEIVE_DEPT_NAME,</if>
+            <if test="receiveDeptCode != null">RECEIVE_DEPT_CODE,</if>
+            <if test="swbSN != null">SWB_SN,</if>
+            <if test="srcSN != null">SRC_SN,</if>
+            <if test="seqNo != null">SEQ_NO,</if>
+            <if test="version != null">VERSION,</if>
+            <if test="busISysInfoUuid != null">BUSISYSINFO_UUID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nextApasInfoId != null">#{nextApasInfoId},</if>
+            <if test="projectCode != null">#{projectCode},</if>
+            <if test="applyType != null">#{applyType},</if>
+            <if test="fromCode != null">#{fromCode},</if>
+            <if test="swbMatterID != null">#{swbMatterID},</if>
+            <if test="swbMatterName != null">#{swbMatterName},</if>
+            <if test="srcMatterID != null">#{srcMatterID},</if>
+            <if test="areaCode != null">#{areaCode},</if>
+            <if test="projectName != null">#{projectName},</if>
+            <if test="receiveDeptName != null">#{receiveDeptName},</if>
+            <if test="receiveDeptCode != null">#{receiveDeptCode},</if>
+            <if test="swbSN != null">#{swbSN},</if>
+            <if test="srcSN != null">#{srcSN},</if>
+            <if test="seqNo != null">#{seqNo},</if>
+            <if test="version != null">#{version},</if>
+            <if test="busISysInfoUuid != null">#{busISysInfoUuid},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="nextCaseEntityResultMap" type="com.tch.system.entity.next2xml.NextCaseEntity">
+        <result column="APPLY_FROM" property="applyFrom"/>
+        <result column="TYPE" property="type"/>
+        <result column="UNID" property="unid"/>
+        <result column="XSD" property="xsd"/>
+    </resultMap>
+
+
+    <insert id="insertNextCaseEntity" parameterType="com.tch.system.entity.next2xml.NextCaseEntity">
+        INSERT INTO HLWJ.NEXT_DATA
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="applyFrom != null">APPLY_FROM,</if>
+            <if test="type != null">TYPE,</if>
+            <if test="unid != null">UNID,</if>
+            <if test="xsd != null">XSD,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="applyFrom != null">#{applyFrom},</if>
+            <if test="type != null">#{type},</if>
+            <if test="unid != null">#{unid},</if>
+            <if test="xsd != null">#{xsd},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="nextNodeResultMap" type="com.tch.system.entity.next2xml.NextNode">
+        <id column="NEXT_NODE_ID" property="nextNodeId"/>
+        <result column="IS_SPECIAL" property="isSpecial"/>
+        <result column="NODE_GUID" property="nodeGuid"/>
+        <result column="SWB_CODE" property="swbCode"/>
+        <result column="SWB_NAME" property="swbName"/>
+        <result column="DZJC_CODE" property="dzjcCode"/>
+        <result column="DZJC_NAME" property="dzjcName"/>
+        <result column="SRC_NAME" property="srcName"/>
+        <result column="NEXT_NAME" property="nextName"/>
+        <result column="NEXT_USER" property="nextUser"/>
+        <result column="PROCESSED_USER" property="processedUser"/>
+        <result column="PROCESSED_USER_POSITION" property="processedUserPosition"/>
+        <result column="PROCESSED_USER_PT_CODE" property="processedUserPtCode"/>
+        <result column="PROCESSED_USER_CODE" property="processedUserCode"/>
+        <result column="START_TIME" property="startTime"/>
+        <result column="PROCESSED_TIME" property="processedTime"/>
+        <result column="TYPE" property="type"/>
+        <result column="PROCESSED_OPINION" property="processedOpinion"/>
+        <result column="PROMISE_END_TIME" property="promiseEndTime"/>
+        <result column="IS_ACPT" property="isAcpt"/>
+        <result column="NO_ACPT_CAUSE" property="noAcptCause"/>
+        <result column="OTHER_INFO" property="otherInfo"/>
+        <result column="REMARK" property="remark"/>
+        <result column="BUSISYSINFO_UUID" property="busISysInfoUuid"/>
+    </resultMap>
+
+
+    <select id="selectNextNodeByUuId" resultType="com.tch.system.entity.next2xml.NextNode"
+            resultMap="nextNodeResultMap">
+        SELECT NEXT_NODE_ID,
+               IS_SPECIAL,
+               NODE_GUID,
+               SWB_CODE,
+               SWB_NAME,
+               DZJC_CODE,
+               DZJC_NAME,
+               SRC_NAME,
+               NEXT_NAME,
+               NEXT_USER,
+               PROCESSED_USER,
+               PROCESSED_USER_POSITION,
+               PROCESSED_USER_PT_CODE,
+               PROCESSED_USER_CODE,
+               START_TIME,
+               PROCESSED_TIME,
+               "TYPE",
+               PROCESSED_OPINION,
+               PROMISE_END_TIME,
+               IS_ACPT,
+               NO_ACPT_CAUSE,
+               OTHER_INFO,
+               REMARK,
+               BUSISYSINFO_UUID
+        FROM HLWJ.NEXT_NODE
+        where BUSISYSINFO_UUID = #{busISysInfoUuid}
+
+
+    </select>
+
+
+    <insert id="insertNextNode" parameterType="com.tch.system.entity.next2xml.NextNode">
+        INSERT INTO HLWJ.NEXT_NODE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nextNodeId != null">NEXT_NODE_ID,</if>
+            <if test="isSpecial != null">IS_SPECIAL,</if>
+            <if test="nodeGuid != null">NODE_GUID,</if>
+            <if test="swbCode != null">SWB_CODE,</if>
+            <if test="swbName != null">SWB_NAME,</if>
+            <if test="dzjcCode != null">DZJC_CODE,</if>
+            <if test="dzjcName != null">DZJC_NAME,</if>
+            <if test="srcName != null">SRC_NAME,</if>
+            <if test="nextName != null">NEXT_NAME,</if>
+            <if test="nextUser != null">NEXT_USER,</if>
+            <if test="processedUser != null">PROCESSED_USER,</if>
+            <if test="processedUserPosition != null">PROCESSED_USER_POSITION,</if>
+            <if test="processedUserPtCode != null">PROCESSED_USER_PT_CODE,</if>
+            <if test="processedUserCode != null">PROCESSED_USER_CODE,</if>
+            <if test="startTime != null">START_TIME,</if>
+            <if test="processedTime != null">PROCESSED_TIME,</if>
+            <if test="type != null">TYPE,</if>
+            <if test="processedOpinion != null">PROCESSED_OPINION,</if>
+            <if test="promiseEndTime != null">PROMISE_END_TIME,</if>
+            <if test="isAcpt != null">IS_ACPT,</if>
+            <if test="noAcptCause != null">NO_ACPT_CAUSE,</if>
+            <if test="otherInfo != null">OTHER_INFO,</if>
+            <if test="remark != null">REMARK,</if>
+            <if test="busISysInfoUuid != null">BUSISYSINFO_UUID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nextNodeId != null">#{nextNodeId},</if>
+            <if test="isSpecial != null">#{isSpecial},</if>
+            <if test="nodeGuid != null">#{nodeGuid},</if>
+            <if test="swbCode != null">#{swbCode},</if>
+            <if test="swbName != null">#{swbName},</if>
+            <if test="dzjcCode != null">#{dzjcCode},</if>
+            <if test="dzjcName != null">#{dzjcName},</if>
+            <if test="srcName != null">#{srcName},</if>
+            <if test="nextName != null">#{nextName},</if>
+            <if test="nextUser != null">#{nextUser},</if>
+            <if test="processedUser != null">#{processedUser},</if>
+            <if test="processedUserPosition != null">#{processedUserPosition},</if>
+            <if test="processedUserPtCode != null">#{processedUserPtCode},</if>
+            <if test="processedUserCode != null">#{processedUserCode},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="processedTime != null">#{processedTime},</if>
+            <if test="type != null">#{type},</if>
+            <if test="processedOpinion != null">#{processedOpinion},</if>
+            <if test="promiseEndTime != null">#{promiseEndTime},</if>
+            <if test="isAcpt != null">#{isAcpt},</if>
+            <if test="noAcptCause != null">#{noAcptCause},</if>
+            <if test="otherInfo != null">#{otherInfo},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="busISysInfoUuid != null">#{busISysInfoUuid},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="NextAttrResultMap" type="com.tch.system.entity.next2xml.Attr">
+        <id property="nextAttrId" column="NEXT_ATTR_ID"/>
+        <result property="dataId" column="DATA_ID"/>
+        <result property="attrUNID" column="ATTR_UNID"/>
+        <result property="attrSort" column="ATTR_SORT"/>
+        <result property="attrName" column="ATTR_NAME"/>
+    </resultMap>
+
+    <select id="selectNextAttrByDataId" resultType="com.tch.system.entity.next2xml.Attr"
+            resultMap="NextAttrResultMap">
+        SELECT NEXT_ATTR_ID, ATTR_UNID, ATTR_SORT, ATTR_NAME, DATA_ID
+        FROM HLWJ.NEXT_ATTR
+        where DATA_ID=#{dataId}
+
+
+    </select>
+
+
+    <insert id="insertNextAttr" parameterType="com.tch.system.entity.next2xml.Attr">
+        INSERT INTO HLWJ.NEXT_ATTR
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nextAttrId != null">NEXT_ATTR_ID,</if>
+            <if test="dataId != null">DATA_ID,</if>
+            <if test="attrUNID != null">ATTR_UNID,</if>
+            <if test="attrSort != null">ATTR_SORT,</if>
+            <if test="attrName != null">ATTR_NAME,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nextAttrId != null">#{nextAttrId},</if>
+            <if test="dataId != null">#{dataId},</if>
+            <if test="attrUNID != null">#{attrUNID},</if>
+            <if test="attrSort != null">#{attrSort},</if>
+            <if test="attrName != null">#{attrName},</if>
+        </trim>
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tch.system.mapper.FinishXmlMapper">
+
+    <resultMap id="apasInfoResultMap" type="com.tch.system.entity.finish2xml.FinishApasInfo">
+        <id column="FINISH_APASINFO_ID" property="finishApasInfoId"/>
+        <result column="PROJECT_CODE" property="projectCode"/>
+        <result column="APPLY_TYPE" property="applyType"/>
+        <result column="FROM_CODE" property="fromCode"/>
+        <result column="SWB_MATTER_ID" property="swbMatterID"/>
+        <result column="SWB_MATTER_NAME" property="swbMatterName"/>
+        <result column="SRC_MATTER_ID" property="srcMatterID"/>
+        <result column="AREA_CODE" property="areaCode"/>
+        <result column="PROJECT_NAME" property="projectName"/>
+        <result column="RECEIVE_DEPT_NAME" property="receiveDeptName"/>
+        <result column="RECEIVE_DEPT_CODE" property="receiveDeptCode"/>
+        <result column="SWB_SN" property="swbSN"/>
+        <result column="SRC_SN" property="srcSN"/>
+        <result column="VERSION" property="version"/>
+        <result column="PROCESSED_USER" property="processedUser"/>
+        <result column="PROCESSED_TIME" property="processedTime"/>
+        <result column="RESULT" property="result"/>
+        <result column="DELIVERY_RESULT" property="deliveryResult"/>
+        <result column="PROCESSED_OPINION" property="processedOpinion"/>
+        <result column="OPEN_WAY" property="openWay"/>
+        <result column="IS_OPEN" property="isOpen"/>
+        <result column="IS_EXIST_LICENCE" property="isExistLicence"/>
+        <result column="DEPT_CODE" property="deptCode"/>
+        <result column="DEPT_NAME" property="deptName"/>
+        <result column="RESULT_TYPE" property="resultType"/>
+        <result column="RESULT_DESC" property="resultDesc"/>
+        <result column="ABN_CAUSE" property="abnCause"/>
+        <result column="BUSISYSINFO_UUID" property="busISysInfoUuid"/>
+    </resultMap>
+
+
+    <select id="selectApasInfoByUnId" resultType="com.tch.system.entity.finish2xml.FinishApasInfo"
+            resultMap="apasInfoResultMap">
+        SELECT FINISH_APASINFO_ID,
+               PROJECT_CODE,
+               APPLY_TYPE,
+               FROM_CODE,
+               SWB_MATTER_ID,
+               SWB_MATTER_NAME,
+               SRC_MATTER_ID,
+               AREA_CODE,
+               PROJECT_NAME,
+               RECEIVE_DEPT_NAME,
+               RECEIVE_DEPT_CODE,
+               SWB_SN,
+               SRC_SN,
+               VERSION,
+               PROCESSED_USER,
+               PROCESSED_TIME,
+               "RESULT",
+               DELIVERY_RESULT,
+               PROCESSED_OPINION,
+               OPEN_WAY,
+               IS_OPEN,
+               IS_EXIST_LICENCE,
+               DEPT_CODE,
+               DEPT_NAME,
+               RESULT_TYPE,
+               RESULT_DESC,
+               ABN_CAUSE,
+               BUSISYSINFO_UUID,
+               TYSJM
+        FROM HLWJ.FINISH_APASINFO
+        WHERE BUSISYSINFO_UUID = #{busISysInfoUuid}
+    </select>
+
+    <insert id="insertApasInfo" parameterType="com.tch.system.entity.finish2xml.FinishApasInfo">
+        INSERT INTO HLWJ.FINISH_APASINFO
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="finishApasInfoId != null">FINISH_APASINFO_ID,</if>
+            <if test="projectCode != null">PROJECT_CODE,</if>
+            <if test="applyType != null">APPLY_TYPE,</if>
+            <if test="fromCode != null">FROM_CODE,</if>
+            <if test="swbMatterID != null">SWB_MATTER_ID,</if>
+            <if test="swbMatterName != null">SWB_MATTER_NAME,</if>
+            <if test="srcMatterID != null">SRC_MATTER_ID,</if>
+            <if test="areaCode != null">AREA_CODE,</if>
+            <if test="projectName != null">PROJECT_NAME,</if>
+            <if test="receiveDeptName != null">RECEIVE_DEPT_NAME,</if>
+            <if test="receiveDeptCode != null">RECEIVE_DEPT_CODE,</if>
+            <if test="swbSN != null">SWB_SN,</if>
+            <if test="srcSN != null">SRC_SN,</if>
+            <if test="version != null">VERSION,</if>
+            <if test="processedUser != null">PROCESSED_USER,</if>
+            <if test="processedTime != null">PROCESSED_TIME,</if>
+            <if test="result != null">RESULT,</if>
+            <if test="deliveryResult != null">DELIVERY_RESULT,</if>
+            <if test="processedOpinion != null">PROCESSED_OPINION,</if>
+            <if test="openWay != null">OPEN_WAY,</if>
+            <if test="isOpen != null">IS_OPEN,</if>
+            <if test="isExistLicence != null">IS_EXIST_LICENCE,</if>
+            <if test="deptCode != null">DEPT_CODE,</if>
+            <if test="deptName != null">DEPT_NAME,</if>
+            <if test="resultType != null">RESULT_TYPE,</if>
+            <if test="resultDesc != null">RESULT_DESC,</if>
+            <if test="abnCause != null">ABN_CAUSE,</if>
+            <if test="busISysInfoUuid != null">BUSISYSINFO_UUID,</if>
+            <if test="tysjm != null">TYSJM,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="finishApasInfoId != null">#{finishApasInfoId},</if>
+            <if test="projectCode != null">#{projectCode},</if>
+            <if test="applyType != null">#{applyType},</if>
+            <if test="fromCode != null">#{fromCode},</if>
+            <if test="swbMatterID != null">#{swbMatterID},</if>
+            <if test="swbMatterName != null">#{swbMatterName},</if>
+            <if test="srcMatterID != null">#{srcMatterID},</if>
+            <if test="areaCode != null">#{areaCode},</if>
+            <if test="projectName != null">#{projectName},</if>
+            <if test="receiveDeptName != null">#{receiveDeptName},</if>
+            <if test="receiveDeptCode != null">#{receiveDeptCode},</if>
+            <if test="swbSN != null">#{swbSN},</if>
+            <if test="srcSN != null">#{srcSN},</if>
+            <if test="version != null">#{version},</if>
+            <if test="processedUser != null">#{processedUser},</if>
+            <if test="processedTime != null">#{processedTime},</if>
+            <if test="result != null">#{result},</if>
+            <if test="deliveryResult != null">#{deliveryResult},</if>
+            <if test="processedOpinion != null">#{processedOpinion},</if>
+            <if test="openWay != null">#{openWay},</if>
+            <if test="isOpen != null">#{isOpen},</if>
+            <if test="isExistLicence != null">#{isExistLicence},</if>
+            <if test="deptCode != null">#{deptCode},</if>
+            <if test="deptName != null">#{deptName},</if>
+            <if test="resultType != null">#{resultType},</if>
+            <if test="resultDesc != null">#{resultDesc},</if>
+            <if test="abnCause != null">#{abnCause},</if>
+            <if test="busISysInfoUuid != null">#{busISysInfoUuid},</if>
+            <if test="tysjm != null">#{tysjm},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="attrResultMap" type="com.tch.system.entity.finish2xml.FinishAttr">
+        <id column="ATTR_ID" property="attrId"/>
+        <result column="ATTRUNID" property="attrUNID"/>
+        <result column="ATTRMODE" property="attrMode"/>
+        <result column="SWBCODE" property="swbCode"/>
+        <result column="SRCCODE" property="srcCode"/>
+        <result column="ATTRNAME" property="attrName"/>
+        <result column="SORT" property="sort"/>
+        <result column="FILENAME" property="fileName"/>
+        <result column="DATASHARE" property="datashare"/>
+        <result column="LICENSEIDENTIFIER" property="licenseIdentifier"/>
+        <result column="CERTIFICATETYPECODE" property="certificateTypeCode"/>
+        <result column="CERTIFICATEHOLDERCODE" property="certificateHolderCode"/>
+        <result column="DATA_ID" property="dataId"/>
+    </resultMap>
+
+
+    <select id="selectFinishAttrByDataId" resultType="com.tch.system.entity.finish2xml.FinishAttr"
+            resultMap="attrResultMap">
+        SELECT ATTR_ID,
+               ATTRUNID,
+               ATTRMODE,
+               SWBCODE,
+               SRCCODE,
+               ATTRNAME,
+               SORT,
+               FILENAME,
+               DATASHARE,
+               LICENSEIDENTIFIER,
+               CERTIFICATETYPECODE,
+               CERTIFICATEHOLDERCODE,
+               DATA_ID
+        FROM HLWJ.FINISH_ATTR
+        WHERE DATA_ID = #{dataId}
+    </select>
+
+    <insert id="insertAttr" parameterType="com.tch.system.entity.finish2xml.FinishAttr">
+        INSERT INTO HLWJ.FINISH_ATTR
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="attrId != null">ATTR_ID,</if>
+            <if test="attrUNID != null">ATTRUNID,</if>
+            <if test="attrMode != null">ATTRMODE,</if>
+            <if test="swbCode != null">SWBCODE,</if>
+            <if test="srcCode != null">SRCCODE,</if>
+            <if test="attrName != null">ATTRNAME,</if>
+            <if test="sort != null">SORT,</if>
+            <if test="fileName != null">FILENAME,</if>
+            <if test="datashare != null">DATASHARE,</if>
+            <if test="licenseIdentifier != null">LICENSEIDENTIFIER,</if>
+            <if test="certificateTypeCode != null">CERTIFICATETYPECODE,</if>
+            <if test="certificateHolderCode != null">CERTIFICATEHOLDERCODE,</if>
+            <if test="dataId != null">DATA_ID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="attrId != null">#{attrId},</if>
+            <if test="attrUNID != null">#{attrUNID},</if>
+            <if test="attrMode != null">#{attrMode},</if>
+            <if test="swbCode != null">#{swbCode},</if>
+            <if test="srcCode != null">#{srcCode},</if>
+            <if test="attrName != null">#{attrName},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="fileName != null">#{fileName},</if>
+            <if test="datashare != null">#{datashare},</if>
+            <if test="licenseIdentifier != null">#{licenseIdentifier},</if>
+            <if test="certificateTypeCode != null">#{certificateTypeCode},</if>
+            <if test="certificateHolderCode != null">#{certificateHolderCode},</if>
+            <if test="dataId != null">#{dataId},</if>
+        </trim>
+    </insert>
+
+    <resultMap id="finishDataResultMap" type="com.tch.system.entity.finish2xml.ResultCaseEntity">
+        <result column="APPLY_FROM" property="applyFrom"/>
+        <result column="TYPE" property="type"/>
+        <result column="UNID" property="unid"/>
+        <result column="XSD" property="xsd"/>
+    </resultMap>
+    <insert id="insertFinishData" parameterType="com.tch.system.entity.finish2xml.ResultCaseEntity">
+        INSERT INTO HLWJ.FINISH_DATA
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="applyFrom != null">APPLY_FROM,</if>
+            <if test="type != null">TYPE,</if>
+            <if test="unid != null">UNID,</if>
+            <if test="xsd != null">XSD,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="applyFrom != null">#{applyFrom},</if>
+            <if test="type != null">#{type},</if>
+            <if test="unid != null">#{unid},</if>
+            <if test="xsd != null">#{xsd},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="FinishLicenseResultMap" type="com.tch.system.entity.xml2bean.FinishLicense">
+        <id property="finishLicenseId" column="FINISH_LICENSE_ID"/>
+        <result property="busISysInfoUuid" column="BUSISYSINFO_UUID"/>
+        <result property="docType" column="DOC_TYPE"/>
+        <result property="seqNo" column="SEQ_NO"/>
+        <result property="licenseName" column="LICENSE_NAME"/>
+        <result property="startDate" column="START_DATE"/>
+        <result property="validateDate" column="VALIDATE_DATE"/>
+        <result property="certUnit" column="CERT_UNIT"/>
+        <result property="certUnitCode" column="CERT_UNIT_CODE"/>
+        <result property="certContent" column="CERT_CONTENT"/>
+        <result property="certifiedTime" column="CERTIFIED_TIME"/>
+        <result property="holder" column="HOLDER"/>
+        <result property="certificateHolderCode" column="CERTIFICATE_HOLDER_CODE"/>
+    </resultMap>
+
+
+    <select id="selectFinishLicenseByUnId" resultType="com.tch.system.entity.xml2bean.FinishLicense"
+            resultMap="FinishLicenseResultMap">
+        SELECT FINISH_LICENSE_ID,
+               DOC_TYPE,
+               SEQ_NO,
+               LICENSE_NAME,
+               START_DATE,
+               VALIDATE_DATE,
+               CERT_UNIT,
+               CERT_UNIT_CODE,
+               CERT_CONTENT,
+               CERTIFIED_TIME,
+               HOLDER,
+               CERTIFICATE_HOLDER_CODE,
+               BUSISYSINFO_UUID
+        FROM HLWJ.FINISH_LICENSE
+        WHERE BUSISYSINFO_UUID = #{busISysInfoUuid}
+
+
+    </select>
+
+    <insert id="insertFinishLicense" parameterType="com.tch.system.entity.xml2bean.FinishLicense">
+        INSERT INTO HLWJ.FINISH_LICENSE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="finishLicenseId != null">FINISH_LICENSE_ID,</if>
+            <if test="busISysInfoUuid != null">BUSISYSINFO_UUID,</if>
+            <if test="docType != null">DOC_TYPE,</if>
+            <if test="seqNo != null">SEQ_NO,</if>
+            <if test="licenseName != null">LICENSE_NAME,</if>
+            <if test="startDate != null">START_DATE,</if>
+            <if test="validateDate != null">VALIDATE_DATE,</if>
+            <if test="certUnit != null">CERT_UNIT,</if>
+            <if test="certUnitCode != null">CERT_UNIT_CODE,</if>
+            <if test="certContent != null">CERT_CONTENT,</if>
+            <if test="certifiedTime != null">CERTIFIED_TIME,</if>
+            <if test="holder != null">HOLDER,</if>
+            <if test="certificateHolderCode != null">CERTIFICATE_HOLDER_CODE,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="finishLicenseId != null">#{finishLicenseId},</if>
+            <if test="busISysInfoUuid != null">#{busISysInfoUuid},</if>
+            <if test="docType != null">#{docType},</if>
+            <if test="seqNo != null">#{seqNo},</if>
+            <if test="licenseName != null">#{licenseName},</if>
+            <if test="startDate != null">#{startDate},</if>
+            <if test="validateDate != null">#{validateDate},</if>
+            <if test="certUnit != null">#{certUnit},</if>
+            <if test="certUnitCode != null">#{certUnitCode},</if>
+            <if test="certContent != null">#{certContent},</if>
+            <if test="certifiedTime != null">#{certifiedTime},</if>
+            <if test="holder != null">#{holder},</if>
+            <if test="certificateHolderCode != null">#{certificateHolderCode},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="FinishResultAttrResultMap" type="com.tch.system.entity.xml2bean.FinishResultAttr">
+        <id property="finishResultAttrId" column="FINISH_RESULT_ATTR_ID"/>
+        <result property="busISysInfoUuid" column="BUSISYSINFO_UUID"/>
+        <result property="unid" column="UNID"/>
+        <result property="attrCategory" column="ATTR_CATEGORY"/>
+        <result property="attrName" column="ATTR_NAME"/>
+        <result property="attrNumber" column="ATTR_NUMBER"/>
+    </resultMap>
+
+
+    <select id="selectFinishResultAttrByUnId" resultType="com.tch.system.entity.xml2bean.FinishResultAttr"
+            resultMap="FinishResultAttrResultMap">
+        SELECT FINISH_RESULT_ATTR_ID, UNID, ATTR_CATEGORY, ATTR_NAME, ATTR_NUMBER, BUSISYSINFO_UUID
+        FROM HLWJ.FINISH_RESULT_ATTR
+        WHERE BUSISYSINFO_UUID = #{busISysInfoUuid}
+
+
+    </select>
+
+
+    <insert id="insertFinishResultAttr" parameterType="com.tch.system.entity.xml2bean.FinishResultAttr">
+        INSERT INTO HLWJ.FINISH_RESULT_ATTR
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="finishResultAttrId != null">FINISH_RESULT_ATTR_ID,</if>
+            <if test="busISysInfoUuid != null">BUSISYSINFO_UUID,</if>
+            <if test="unid != null">UNID,</if>
+            <if test="attrCategory != null">ATTR_CATEGORY,</if>
+            <if test="attrName != null">ATTR_NAME,</if>
+            <if test="attrNumber != null">ATTR_NUMBER,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="finishResultAttrId != null">#{finishResultAttrId},</if>
+            <if test="busISysInfoUuid != null">#{busISysInfoUuid},</if>
+            <if test="unid != null">#{unid},</if>
+            <if test="attrCategory != null">#{attrCategory},</if>
+            <if test="attrName != null">#{attrName},</if>
+            <if test="attrNumber != null">#{attrNumber},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="FinishSMSResultMap" type="com.tch.system.entity.xml2bean.FinishSMS">
+        <id property="finishSmsId" column="FINISH_SMS_ID"/>
+        <result property="busISysInfoUuid" column="BUSISYSINFO_UUID"/>
+        <result property="receiver" column="RECEIVER"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="content" column="CONTENT"/>
+    </resultMap>
+
+    <select id="selectFinishSMSByUnId" resultType="com.tch.system.entity.xml2bean.FinishSMS"
+            resultMap="FinishSMSResultMap">
+        SELECT FINISH_SMS_ID, RECEIVER, ADDRESS, CONTENT, BUSISYSINFO_UUID
+        FROM HLWJ.FINISH_SMS
+        WHERE BUSISYSINFO_UUID = #{busISysInfoUuid}
+
+    </select>
+
+
+    <insert id="insertFinishSMS" parameterType="com.tch.system.entity.xml2bean.FinishSMS">
+        INSERT INTO HLWJ.FINISH_SMS
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="finishSmsId != null">FINISH_SMS_ID,</if>
+            <if test="busISysInfoUuid != null">BUSISYSINFO_UUID,</if>
+            <if test="receiver != null">RECEIVER,</if>
+            <if test="address != null">ADDRESS,</if>
+            <if test="content != null">CONTENT,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="finishSmsId != null">#{finishSmsId},</if>
+            <if test="busISysInfoUuid != null">#{busISysInfoUuid},</if>
+            <if test="receiver != null">#{receiver},</if>
+            <if test="address != null">#{address},</if>
+            <if test="content != null">#{content},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="SpecialEndResultMap" type="com.tch.system.entity.link2xml.SpecialEnd">
+        <id property="specialEndId" column="SPECIAL_END_ID"/>
+        <result property="operUser" column="OPER_USER"/>
+        <result property="result" column="RESULT"/>
+        <result property="resultTime" column="RESULT_TIME"/>
+        <result property="endTime" column="END_TIME"/>
+        <result property="specialEndChargeAmount" column="SPECIAL_END_CHARGE_AMOUNT"/>
+        <result property="dataId" column="DATA_ID"/>
+    </resultMap>
+
+    <select id="selectSpecialEndByDataId" resultType="com.tch.system.entity.link2xml.SpecialEnd"
+            resultMap="SpecialEndResultMap">
+        SELECT SPECIAL_END_ID, OPER_USER, "RESULT", RESULT_TIME, END_TIME, SPECIAL_END_CHARGE_AMOUNT, DATA_ID
+        FROM HLWJ.SPECIAL_END
+        WHERE DATA_ID = #{dataId}
+    </select>
+
+    <insert id="insertSpecialEnd" parameterType="com.tch.system.entity.link2xml.SpecialEnd">
+        INSERT INTO HLWJ.SPECIAL_END
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="specialEndId != null">SPECIAL_END_ID,</if>
+            <if test="operUser != null">OPER_USER,</if>
+            <if test="result != null">RESULT,</if>
+            <if test="resultTime != null">RESULT_TIME,</if>
+            <if test="endTime != null">END_TIME,</if>
+            <if test="specialEndChargeAmount != null">SPECIAL_END_CHARGE_AMOUNT,</if>
+            <if test="dataId != null">DATA_ID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="specialEndId != null">#{specialEndId},</if>
+            <if test="operUser != null">#{operUser},</if>
+            <if test="result != null">#{result},</if>
+            <if test="resultTime != null">#{resultTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="specialEndChargeAmount != null">#{specialEndChargeAmount},</if>
+            <if test="dataId != null">#{dataId},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="SpecialStartResultMap" type="com.tch.system.entity.link2xml.SpecialStart">
+        <id property="specialStartId" column="SPECIAL_START_ID"/>
+        <result property="classCode" column="CLASS_CODE"/>
+        <result property="className" column="CLASS_NAME"/>
+        <result property="startTime" column="START_TIME"/>
+        <result property="approveUser" column="APPROVE_USER"/>
+        <result property="approveUserTel" column="APPROVE_USER_TEL"/>
+        <result property="approveUserMobi" column="APPROVE_USER_MOBI"/>
+        <result property="basis" column="BASIS"/>
+        <result property="content" column="CONTENT"/>
+        <result property="limit" column="LIMIT_VAL"/>
+        <result property="limitUnit" column="LIMIT_UNIT"/>
+        <result property="preEndTime" column="PRE_END_TIME"/>
+        <result property="dataId" column="DATA_ID"/>
+    </resultMap>
+
+    <select id="selectSpecialStartByDataId" resultType="com.tch.system.entity.link2xml.SpecialStart"
+            resultMap="SpecialStartResultMap">
+        SELECT SPECIAL_START_ID,
+               CLASS_CODE,
+               CLASS_NAME,
+               START_TIME,
+               APPROVE_USER,
+               APPROVE_USER_TEL,
+               APPROVE_USER_MOBI,
+               BASIS,
+               CONTENT,
+               LIMIT_VAL,
+               LIMIT_UNIT,
+               PRE_END_TIME,
+               DATA_ID
+        FROM HLWJ.SPECIAL_START
+        WHERE DATA_ID = #{dataId}
+
+    </select>
+
+
+    <insert id="insertSpecialStart" parameterType="com.tch.system.entity.link2xml.SpecialStart">
+        INSERT INTO HLWJ.SPECIAL_START
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="specialStartId != null">SPECIAL_START_ID,</if>
+            <if test="classCode != null">CLASS_CODE,</if>
+            <if test="className != null">CLASS_NAME,</if>
+            <if test="startTime != null">START_TIME,</if>
+            <if test="approveUser != null">APPROVE_USER,</if>
+            <if test="approveUserTel != null">APPROVE_USER_TEL,</if>
+            <if test="approveUserMobi != null">APPROVE_USER_MOBI,</if>
+            <if test="basis != null">BASIS,</if>
+            <if test="content != null">CONTENT,</if>
+            <if test="limit != null">LIMIT_VAL,</if>
+            <if test="limitUnit != null">LIMIT_UNIT,</if>
+            <if test="preEndTime != null">PRE_END_TIME,</if>
+            <if test="dataId != null">DATA_ID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="specialStartId != null">#{specialStartId},</if>
+            <if test="classCode != null">#{classCode},</if>
+            <if test="className != null">#{className},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="approveUser != null">#{approveUser},</if>
+            <if test="approveUserTel != null">#{approveUserTel},</if>
+            <if test="approveUserMobi != null">#{approveUserMobi},</if>
+            <if test="basis != null">#{basis},</if>
+            <if test="content != null">#{content},</if>
+            <if test="limit != null">#{limit},</if>
+            <if test="limitUnit != null">#{limitUnit},</if>
+            <if test="preEndTime != null">#{preEndTime},</if>
+            <if test="dataId != null">#{dataId},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="SuppMatResultMap" type="com.tch.system.entity.link2xml.SuppMat">
+        <id property="suppMatId" column="SUPP_MAT_ID"/>
+        <result property="smType" column="SM_TYPE"/>
+        <result property="dataId" column="DATA_ID"/>
+    </resultMap>
+
+    <select id="selectSuppMatByDataId" resultType="com.tch.system.entity.link2xml.SuppMat"
+            resultMap="SuppMatResultMap">
+        SELECT SUPP_MAT_ID, SM_TYPE, DATA_ID
+        FROM HLWJ.SUPP_MAT
+        WHERE DATA_ID = #{dataId}
+    </select>
+
+
+    <insert id="insertSuppMat" parameterType="com.tch.system.entity.link2xml.SuppMat">
+        INSERT INTO HLWJ.SUPP_MAT
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="suppMatId != null">SUPP_MAT_ID,</if>
+            <if test="smType != null">SM_TYPE,</if>
+            <if test="dataId != null">DATA_ID,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="suppMatId != null">#{suppMatId},</if>
+            <if test="smType != null">#{smType},</if>
+            <if test="dataId != null">#{dataId},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="SuppMatStartAttrResultMap" type="com.tch.system.entity.link2xml.SuppMatStartAttr">
+        <id property="suppMatStartAttrId" column="SUPP_MAT_START_ATTR_ID"/>
+        <result property="dataId" column="DATA_ID"/>
+        <result property="suppMatStartAttrSwbCode" column="SUPP_MAT_START_ATTR_SWB_CODE"/>
+        <result property="suppMatStartAttrSrcCode" column="SUPP_MAT_START_ATTR_SRC_CODE"/>
+        <result property="suppMatStartAttrName" column="SUPP_MAT_START_ATTR_NAME"/>
+        <result property="suppMatStartAttrSeqNo" column="SUPP_MAT_START_ATTR_SEQ_NO"/>
+    </resultMap>
+
+    <select id="selectSuppMatStartAttrByDataId" resultType="com.tch.system.entity.link2xml.SuppMatStartAttr"
+            resultMap="SuppMatStartAttrResultMap">
+        SELECT SUPP_MAT_START_ATTR_ID,
+               SUPP_MAT_START_ATTR_SWB_CODE,
+               SUPP_MAT_START_ATTR_SRC_CODE,
+               SUPP_MAT_START_ATTR_NAME,
+               SUPP_MAT_START_ATTR_SEQ_NO,
+               DATA_ID
+        FROM HLWJ.SUPP_MAT_START_ATTR
+        WHERE DATA_ID=#{dataId}
+
+
+    </select>
+    <insert id="insertSuppMatStartAttr" parameterType="com.tch.system.entity.link2xml.SuppMatStartAttr">
+        INSERT INTO HLWJ.SUPP_MAT_START_ATTR
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="suppMatStartAttrId != null">SUPP_MAT_START_ATTR_ID,</if>
+            <if test="dataId != null">DATA_ID,</if>
+            <if test="suppMatStartAttrSwbCode != null">SUPP_MAT_START_ATTR_SWB_CODE,</if>
+            <if test="suppMatStartAttrSrcCode != null">SUPP_MAT_START_ATTR_SRC_CODE,</if>
+            <if test="suppMatStartAttrName != null">SUPP_MAT_START_ATTR_NAME,</if>
+            <if test="suppMatStartAttrSeqNo != null">SUPP_MAT_START_ATTR_SEQ_NO,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="suppMatStartAttrId != null">#{suppMatStartAttrId},</if>
+            <if test="dataId != null">#{dataId},</if>
+            <if test="suppMatStartAttrSwbCode != null">#{suppMatStartAttrSwbCode},</if>
+            <if test="suppMatStartAttrSrcCode != null">#{suppMatStartAttrSrcCode},</if>
+            <if test="suppMatStartAttrName != null">#{suppMatStartAttrName},</if>
+            <if test="suppMatStartAttrSeqNo != null">#{suppMatStartAttrSeqNo},</if>
+        </trim>
+    </insert>
+
+
+    <resultMap id="SuppMatStartResultMap" type="com.tch.system.entity.link2xml.SuppMatStart">
+        <id property="suppMatStartId" column="SUPP_MAT_START_ID"/>
+        <result property="dataId" column="DATA_ID"/>
+        <result property="smSendUser" column="SM_SEND_USER"/>
+        <result property="smCause" column="SM_CAUSE"/>
+        <result property="smSendTime" column="SM_SEND_TIME"/>
+    </resultMap>
+
+    <select id="selectSuppMatStartByDataId" resultType="com.tch.system.entity.link2xml.SuppMatStart"
+            resultMap="SuppMatStartResultMap">
+        SELECT SUPP_MAT_START_ID, SM_SEND_USER, SM_CAUSE, SM_SEND_TIME, DATA_ID
+        FROM HLWJ.SUPP_MAT_START
+        WHERE DATA_ID = #{dataId}
+    </select>
+
+    <insert id="insertSuppMatStart" parameterType="com.tch.system.entity.link2xml.SuppMatStart">
+        INSERT INTO HLWJ.SUPP_MAT_START
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="suppMatStartId != null">SUPP_MAT_START_ID,</if>
+            <if test="dataId != null">DATA_ID,</if>
+            <if test="smSendUser != null">SM_SEND_USER,</if>
+            <if test="smCause != null">SM_CAUSE,</if>
+            <if test="smSendTime != null">SM_SEND_TIME,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="suppMatStartId != null">#{suppMatStartId},</if>
+            <if test="dataId != null">#{dataId},</if>
+            <if test="smSendUser != null">#{smSendUser},</if>
+            <if test="smCause != null">#{smCause},</if>
+            <if test="smSendTime != null">#{smSendTime},</if>
+        </trim>
+    </insert>
+</mapper>
